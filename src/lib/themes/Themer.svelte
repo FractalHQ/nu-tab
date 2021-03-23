@@ -1,6 +1,5 @@
 <script>
-	import { activeTheme } from './themeStore';
-	import { applyTheme, getTheme } from './themer';
+	import { getTheme, toggleTheme } from './themer';
 	import { onMount } from 'svelte';
 	import SunAndMoon from './SunAndMoon.svelte';
 
@@ -9,16 +8,16 @@
 	});
 </script>
 
-<SunAndMoon />
-
-<div class="theme-toggle">
-	{#if $activeTheme == 'light'}
-		<div class="light" on:click={() => applyTheme('dark')}>☀️</div>
-	{:else if $activeTheme == 'dark'}
-		<div class="dark" on:click={() => applyTheme('light')}>🌙</div>
-	{/if}
+<div class="theme-toggle" on:click={toggleTheme}>
+	<SunAndMoon />
 </div>
 
+<!-- {#if $activeTheme == 'light'} -->
+<!-- <div class="light" on:click={() => applyTheme('dark')}>☀️</div> -->
+<!-- {:else if $activeTheme == 'dark'} -->
+<!-- <div class="dark" on:click={() => applyTheme('light')}>🌙</div> -->
+
+<!-- {/if} -->
 <style>
 	.theme-toggle {
 		position: absolute;

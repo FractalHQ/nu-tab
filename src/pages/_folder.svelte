@@ -4,8 +4,8 @@
 </script>
 
 <div id="app">
+	<Themer />
 	<nav>
-		<Themer />
 		<a href="/index" use:$url>Home</a>
 		<a href="/dev" use:$url>Dev</a>
 	</nav>

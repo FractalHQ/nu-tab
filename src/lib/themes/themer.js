@@ -1,4 +1,5 @@
 import { activeTheme } from './themeStore';
+import { get } from 'svelte/store';
 import { themes } from './themes';
 
 const verbose = true; // toggle to enable verbose debugging
@@ -95,5 +96,11 @@ export const getTheme = async () => {
 			applySystemTheme();
 		}
 };
+
+export const toggleTheme = () => {
+	get(activeTheme) == 'light'
+		? applyTheme('dark')
+		: applyTheme('light')
+}
 // applyTheme();
 // getTheme();
