@@ -1,28 +1,34 @@
 <script>
 	import { getTheme, toggleTheme } from './themer';
+	import { activeTheme } from './themeStore';
+	import Clouds from './graphics/Clouds.svelte';
 	import { onMount } from 'svelte';
-	import SunAndMoon from './SunAndMoon.svelte';
+	import Moon from './graphics/Moon.svelte';
+	import Sun from './graphics/Sun.svelte';
+	import Stars from './graphics/Stars.svelte';
 
 	onMount(() => {
 		getTheme();
 	});
+
+	export let size;
 </script>
 
 <div class="theme-toggle" on:click={toggleTheme}>
-	<SunAndMoon />
+	{#if $activeTheme == 'light'}
+		<Sun {size} />
+		<Clouds {size} />
+	{:else}
+		<Stars {size} />
+		<Moon {size} />
+	{/if}
 </div>
 
-<!-- {#if $activeTheme == 'light'} -->
-<!-- <div class="light" on:click={() => applyTheme('dark')}>☀️</div> -->
-<!-- {:else if $activeTheme == 'dark'} -->
-<!-- <div class="dark" on:click={() => applyTheme('light')}>🌙</div> -->
-
-<!-- {/if} -->
 <style>
 	.theme-toggle {
 		position: absolute;
 		cursor: pointer;
-		left: 17px;
-		top: 12px;
+		left: 7px;
+		top: 0px;
 	}
 </style>

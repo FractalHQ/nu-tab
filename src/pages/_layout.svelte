@@ -1,14 +1,17 @@
 <script>
 	import Themer from '../lib/themes/Themer.svelte';
-	import { url } from '@roxi/routify';
+	import { layout, url } from '@roxi/routify';
 </script>
 
 <div id="app">
-	<Themer />
+	<Themer size={50} />
+
 	<nav>
-		<a href="/index" use:$url>Home</a>
-		<a href="/dev" use:$url>Dev</a>
+		{#each $layout.children as { path, title }}
+			<a href={path} use:$url>{title}</a>
+		{/each}
 	</nav>
+
 	<main>
 		<slot />
 	</main>
@@ -22,7 +25,7 @@
 	nav {
 		display: flex;
 		justify-content: space-around;
+		flex-direction: row-reverse;
 		padding: 1rem;
-		border-bottom: 1px solid rgb(var(--primary-a));
 	}
 </style>

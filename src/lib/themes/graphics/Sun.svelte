@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { activeTheme } from './themeStore';
-	import { tweened } from 'svelte/motion';
+	import { fade } from 'svelte/transition';
+
 	export let size = 35;
-	let style = 'top:0;left:0;';
-	// export let stroke = 'rgb(var(--dark-a), 0.1)';
+
 	let radius = 2.5;
 </script>
 
-<div style="width: {size}px; {style}">
+<div class="container" style="width: {size}px;" transition:fade>
 	<svg
 		width="100%"
 		height="100%"
@@ -19,28 +18,28 @@
 		<circle x="5" y="5" r={radius * 2} fill="url(#SunGlow)" />
 		<defs>
 			<radialGradient id="SunGradient">
-				<stop offset="0.6" stop-color="#F31">
+				<stop offset="0.6" stop-color="#FD0">
 					<animate
 						attributeName="stop-color"
-						values="#F63;#F31;#F63"
+						values="#FD0;#FA0;#FD0"
 						dur="10s"
 						repeatCount="indefinite"
 						autoReverse="true"
 					/>
 				</stop>
-				<stop offset="0.8" stop-color="#F83">
+				<stop offset="0.95" stop-color="#FD0">
 					<animate
 						attributeName="stop-color"
-						values="#F83;#F63;#F83"
+						values="#FD0;#ff1;#FD0"
 						dur="7s"
 						repeatCount="indefinite"
 						autoReverse="true"
 					/>
 				</stop>
-				<stop offset="1" stop-color="#ff1">
+				<stop offset="1" stop-color="#ff12">
 					<animate
 						attributeName="stop-color"
-						values="#ff1;#f92;#ff1"
+						values="#ff10;#ff10;#ff10"
 						dur="6s"
 						repeatCount="indefinite"
 						autoReverse="true"
@@ -51,7 +50,7 @@
 				<stop offset="0" stop-color="#ff1" transform="scale(2)">
 					<animate
 						attributeName="stop-color"
-						values="#ff13;#f922;#ff13"
+						values="#ff13;#ff11;#ff13"
 						dur="6s"
 						repeatCount="indefinite"
 						autoReverse="true"
@@ -67,20 +66,14 @@
 					/>
 				</stop>
 			</radialGradient>
-			<!-- <linearGradient id="MoonGradient" x1="0" x2="0" y1="0" y2="1">
-				<stop offset="5%" stop-color="red" />
-				<stop offset="95%" stop-color="orange" />
-			</linearGradient> -->
 		</defs>
 	</svg>
 </div>
 
 <style>
-	div {
+	.container {
 		position: absolute;
-		max-width: max-content;
+		left: 0;
+		top: 0;
 	}
-	/* circle {
-		fill: url(#SunGradient);
-	} */
 </style>

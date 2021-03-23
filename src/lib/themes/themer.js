@@ -2,7 +2,7 @@ import { activeTheme } from './themeStore';
 import { get } from 'svelte/store';
 import { themes } from './themes';
 
-const verbose = true; // toggle to enable verbose debugging
+const verbose = false; // toggle to enable verbose debugging
 const log = verbose
 	? (str, color = 'lightblue', font_size = 15) => console.log(`%c${str}`, `size:${font_size}px;color:${color}`)
 	: (s, c, f) => {};
