@@ -1,0 +1,36 @@
+const light = {
+    primaryA: '216, 30, 91',
+    primaryB: '17, 255, 170',
+    secondaryA: '51, 24, 50',
+    secondaryB: '198, 216, 211',
+    lightA: '245, 245, 245',
+    lightB: '215, 220, 224',
+    lightC: '125, 138, 162',
+    lightD: '103, 113, 130',
+    darkA: '12, 17, 23',
+    darkB: '31, 38, 45',
+    darkC: '49, 57, 68',
+    darkD: '70, 78, 92',
+    alwaysDark: '12, 17, 23',
+    alwaysLight: '212, 217, 223',
+    invert: 'none',
+};
+const dark = {
+    primaryA: '216, 30, 91',
+    primaryB: '240, 84, 79',
+    secondaryA: '51, 24, 50',
+    secondaryB: '198, 216, 211',
+    lightA: '12, 17, 23',
+    lightB: '31, 38, 45',
+    lightC: '49, 57, 68',
+    lightD: '70, 78, 92',
+    darkA: '245, 245, 245',
+    darkB: '215, 220, 224',
+    darkC: '125, 138, 162',
+    darkD: '103, 113, 130',
+    alwaysDark: '12, 17, 23',
+    alwaysLight: '212, 217, 223',
+    invert: 'invert(1)',
+};
+
+export const themes = { light, dark };
