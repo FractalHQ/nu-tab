@@ -19,7 +19,9 @@
 
 <style>
 	#app {
+		transition: background-color 0.3s, color 0.3s;
 		background-color: rgb(var(--light-a));
+		color: rgb(var(--dark-a));
 		min-height: 100vh;
 	}
 	nav {
@@ -27,5 +29,9 @@
 		justify-content: space-around;
 		flex-direction: row-reverse;
 		padding: 1rem;
+	}
+	a {
+		text-decoration: none;
+		color: rgb(var(--dark-a));
 	}
 </style>
