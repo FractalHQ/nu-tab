@@ -1,12 +1,9 @@
-<script lang="ts">
-	import { fade } from 'svelte/transition';
-
-	export let size = 35;
-
+<script>
+	export let size;
 	let radius = 2.5;
 </script>
 
-<div class="container" style="width: {size}px;" transition:fade>
+<div class="container" style="width: {size}px;">
 	<svg
 		width="100%"
 		height="100%"

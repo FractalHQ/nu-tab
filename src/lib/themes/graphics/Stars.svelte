@@ -1,27 +1,33 @@
 <script>
 	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	export let size;
+	let mounted = false;
+	onMount(() => (mounted = true));
 
 	const p = (max) => Math.floor(Math.random() * Math.floor(max)); // random star position
 	const s = (max) => (Math.random() * Math.floor(max)).toFixed(2); // random star size
 </script>
 
-<div
-	class="star-container"
-	style="width:{size * 1.5}px; height: {size}px"
-	transition:fade
->
-	{#each Array(25).fill() as star}
-		<!-- prettier-ignore -->
-		<div style="--star-size: {String(s(2) / 3) + 'px'}">
+{#if mounted}
+	<div
+		class="star-container"
+		style="width:{size * 1.5}px; height: {size}px"
+		out:fade
+		in:fade={{ delay: 750, duration: 2000 }}
+	>
+		{#each Array(25).fill() as star}
+			<!-- prettier-ignore -->
+			<div style="--star-size: {String(s(2) / 3) + 'px'}">
 			<figure style="top:{p(100)}%;left:{p(100)}%;animation-delay:{p(3)}s;" class="star">
         	    <figure class="star-top" />
         	    <figure class="star-bottom" />
         	</figure>
 		</div>
-	{/each}
-</div>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	.star-container {

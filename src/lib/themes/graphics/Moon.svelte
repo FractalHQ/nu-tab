@@ -1,10 +1,8 @@
 <script>
-	import { fade } from 'svelte/transition';
-
-	export let size = 35;
+	export let size;
 </script>
 
-<div class="container" style="width: {size}px;" transition:fade>
+<div class="container" style="width: {size}px;">
 	<svg
 		id="moon"
 		width="100%"
