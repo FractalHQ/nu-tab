@@ -1,23 +1,22 @@
 <script>
 	export let setting;
+	const { min, max } = setting;
 </script>
 
-<label for="control">
-	<div class="control">
-		<input name="size" bind:value={setting} type="range" />
-		{setting}
-	</div>
-</label>
+<input name={setting} bind:value={setting.value} type="range" {min} {max} />
 
 <style>
-	label {
-		color: rgb(var(--dark-a));
-	}
 	input[type='range'] {
 		background: none;
+		max-width: 80%;
 	}
 	input[type='range']::-webkit-slider-thumb {
 		background: rgb(var(--light-c));
+		background-image: radial-gradient(
+			ellipse at var(--progress) var(--progress),
+			blue,
+			red
+		);
 		-webkit-appearance: none;
 	}
 	input[type='range'] {
