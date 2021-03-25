@@ -1,4 +1,11 @@
-<div class="settings-button">⚙️</div>
+<div class="settings-button">
+	<div class="burger">
+		<div class="bar" />
+		<div class="bar" />
+		<div class="bar" />
+	</div>
+	<div class="gear">⚙</div>
+</div>
 
 <style>
 	.settings-button {
@@ -10,5 +17,9 @@
 
 		font-size: 25px;
 		cursor: pointer;
+	}
+	.burger {
+		display: flex;
+		flex-direction: row;
 	}
 </style>

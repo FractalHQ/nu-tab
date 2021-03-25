@@ -22,7 +22,8 @@ const mapTheme = (theme = themes['light']) => {
 		'--dark-c': theme.darkC || '',
 		'--dark-d': theme.darkD || '',
 		'--always-light': theme.alwaysLight || '',
-		'--always-dark': theme.alwaysDark || '',
+		'--always-dark-a': theme.alwaysDarkA || '',
+		'--always-dark-b': theme.alwaysDarkB || '',
 		'--invert': theme.invert || '',
 	};
 };

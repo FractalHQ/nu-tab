@@ -1,7 +1,9 @@
 <script>
+	import SettingsButton from '../lib/settings/SettingsButton.svelte';
+	import Settings from '../lib/settings/Settings.svelte';
 	import Themer from '../lib/themes/Themer.svelte';
 	import { layout, url } from '@roxi/routify';
-	import SettingsButton from '../lib/settings/SettingsButton.svelte';
+	import Nav from '../lib/ui/Nav.svelte';
 
 	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max));
 
@@ -13,34 +15,23 @@
 	style="background-image: linear-gradient(to top, rgba({rgba()}), rgba({rgba()}))"
 >
 	<Themer size={50} />
-	<nav>
-		{#each $layout.children as { path, title }}
-			<a href={path} use:$url>{title}</a>
-		{/each}
-	</nav>
+
+	<Nav />
 
 	<main>
 		<slot />
 	</main>
 
-	<SettingsButton />
+	<Settings />
 </div>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 	#app {
+		font-family: Abel;
 		transition: background-color 0.3s, color 0.3s;
 		background-color: rgb(var(--light-a));
 		color: rgb(var(--dark-a));
 		min-height: 100vh;
-	}
-	nav {
-		justify-content: space-around;
-		flex-direction: row-reverse;
-		padding: 1rem;
-		display: flex;
-	}
-	a {
-		color: rgb(var(--dark-a));
-		text-decoration: none;
 	}
 </style>

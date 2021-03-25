@@ -1,19 +1,13 @@
 <script>
-	export let settings;
-	const { url, color, image, title, size, spacing } = settings;
+	import { bookmark_settings } from '../settings/Settings.svelte';
+
+	const { url, color, image, title } = $bookmark_settings;
 </script>
 
 <div
 	class="bookmark"
 	style="
-		{image
-		? `background-image: ${image}`
-		: `background: ${color}`};
-		width: {size}px;
-		height: {size}px;
-		max-width: {size}px;
-		max-height: {size}px;
-		margin: {spacing}px;
+		{image ? `background-image: ${image}` : `background: ${color}`};
 	"
 >
 	<a href={url} target="_blank">
@@ -23,6 +17,8 @@
 
 <style>
 	.bookmark {
+		width: 100%;
+		height: 100%;
 		border-radius: 10px;
 		align-items: center;
 		text-align: center;
