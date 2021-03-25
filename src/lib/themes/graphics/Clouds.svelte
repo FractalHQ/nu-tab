@@ -7,7 +7,8 @@
 <div
 	class="container"
 	style="width: {size}px;"
-	transition:fly={{ x: -size / 2, duration: 3000 }}
+	in:fly={{ x: -size, duration: 3000 }}
+	out:fly={{ x: -size, duration: 6000, opacity: 1 }}
 >
 	<svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<circle
