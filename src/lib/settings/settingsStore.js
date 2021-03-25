@@ -1,8 +1,13 @@
 import { localStorageStore } from '../utils/localStorageStore'
 
+export const ranges = {
+    size: { min: 75, max: 250 },
+    gap: { min: 0, max: 100 },
+}
+
 const default_settings = {
-	size: { value: 100, min: 50, max: 150 },
-	gap: { value: 10, min: 0, max: 100 },
+	size: 100,
+	gap: 10,
 };
 
 export const settings = localStorageStore('settings', default_settings)

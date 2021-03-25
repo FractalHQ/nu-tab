@@ -1,7 +1,11 @@
 <script>
 	import Bookmark from './Bookmark.svelte';
 	import Range from './Range.svelte';
-	import { settings } from '../settings/settingsStore';
+	import { settings, ranges } from '../settings/settingsStore';
+
+	const updateSetting = (setting, value) => {
+		$settings.setting = value;
+	};
 </script>
 
 <div class="collection-container">
@@ -10,9 +14,9 @@
 		<div
 			class="bookmark-container"
 			style="
-				width: {$settings.size.value}px;
-				height: {$settings.size.value}px;
-				margin: {$settings.gap.value}px;
+				width: {$settings.size}px;
+				height: {$settings.size}px;
+				margin: {$settings.gap}px;
 				"
 		>
 			<Bookmark />
@@ -22,12 +26,14 @@
 
 <div class="control-panel">
 	<div class="controls">
-		{#each Object.keys($settings) as setting, i}
+		{#each Object.keys($settings) as setting}
 			<div class="control">
 				<label for={setting}>{setting}</label>
 				<Range
+					range={ranges[setting]}
 					bind:setting={$settings[setting]}
-					on:change={(e) => console.log(e)}
+					on:change={(e) => ($settings[setting] = e.target.value)}
+					name={setting}
 				/>
 			</div>
 		{/each}

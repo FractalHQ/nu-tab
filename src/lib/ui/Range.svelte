@@ -1,16 +1,9 @@
 <script>
-	export let setting;
-	const { min, max } = setting;
+	export let setting, name, range;
+	const { min, max } = range;
 </script>
 
-<input
-	name={setting}
-	bind:value={setting.value}
-	type="range"
-	{min}
-	{max}
-	on:change
-/>
+<input {name} bind:value={setting} type="range" {min} {max} on:change />
 
 <style>
 	input[type='range'] {

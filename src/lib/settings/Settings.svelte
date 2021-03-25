@@ -1,11 +1,9 @@
 <script context="module">
-	import { localStorageStore } from '../utils/localStorageStore';
+	import { writable } from 'svelte/store';
 
 	const randomColor = () =>
 		'#' + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0');
-	localStorage.clear();
-
-	export const bookmark_settings = localStorageStore('settings', {
+	export const bookmark_settings = writable({
 		url: 'https://www.google.com',
 		color: randomColor(),
 		image: null,
