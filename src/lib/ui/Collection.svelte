@@ -1,11 +1,7 @@
 <script>
 	import Bookmark from './Bookmark.svelte';
 	import Range from './Range.svelte';
-
-	let settings = {
-		size: { value: 100, min: 50, max: 150 },
-		gap: { value: 10, min: 0, max: 100 },
-	};
+	import { settings } from '../settings/settingsStore';
 </script>
 
 <div class="collection-container">
@@ -14,9 +10,9 @@
 		<div
 			class="bookmark-container"
 			style="
-				width: {settings.size.value}px;
-				height: {settings.size.value}px;
-				margin: {settings.gap.value}px;
+				width: {$settings.size.value}px;
+				height: {$settings.size.value}px;
+				margin: {$settings.gap.value}px;
 				"
 		>
 			<Bookmark />
@@ -26,10 +22,13 @@
 
 <div class="control-panel">
 	<div class="controls">
-		{#each Object.keys(settings) as setting, i}
+		{#each Object.keys($settings) as setting, i}
 			<div class="control">
 				<label for={setting}>{setting}</label>
-				<Range bind:setting={settings[setting]} />
+				<Range
+					bind:setting={$settings[setting]}
+					on:change={(e) => console.log(e)}
+				/>
 			</div>
 		{/each}
 	</div>
@@ -64,15 +63,17 @@
 	}
 	.collection-container {
 		/* justify-content: space-evenly; */
+		width: max-content;
 		max-width: 80vw;
 		flex-wrap: wrap;
 		margin: 0 auto;
 		display: grid;
 		contain: none;
 		display: flex;
+		justify-content: center;
 	}
 	.control {
-		border: 2px solid rgba(var(--dark-c), 0.2);
+		border: 2px solid rgba(var(--light-c), 0.33);
 		height: max-content;
 		border-radius: 10px;
 		padding: 2px 15px;
@@ -81,6 +82,7 @@
 		margin: 40px 0;
 		font-size: 20px;
 		justify-content: space-between;
+		background: rgba(var(--light-b), 0.33);
 	}
 	label {
 		height: 100%;

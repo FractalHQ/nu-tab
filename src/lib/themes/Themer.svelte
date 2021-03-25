@@ -28,7 +28,7 @@
 	.theme-toggle {
 		position: absolute;
 		cursor: pointer;
-		left: 7px;
+		/* left: 7px; */
 		top: 0px;
 	}
 </style>

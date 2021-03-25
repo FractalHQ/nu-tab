@@ -3,9 +3,8 @@
 
 	export let size;
 
-	const r = (max) => Math.floor(Math.random() * Math.floor(max));
-
-	const s = r(2);
+	const p = (max) => Math.floor(Math.random() * Math.floor(max)); // random star position
+	const s = (max) => (Math.random() * Math.floor(max)).toFixed(2); // random star size
 </script>
 
 <div
@@ -13,12 +12,14 @@
 	style="width:{size * 1.5}px; height: {size}px"
 	transition:fade
 >
-	{#each Array(30).fill() as star}
+	{#each Array(25).fill() as star}
 		<!-- prettier-ignore -->
-		<figure style="top:{r(100)}%;left:{r(100)}%;animation-delay:{r(3)}s;width:{s}px;height:{s}px" class="star">
-            <figure class="star-top" />
-            <figure class="star-bottom" />
-        </figure>
+		<div style="--star-size: {String(s(2) / 3) + 'px'}">
+			<figure style="top:{p(100)}%;left:{p(100)}%;animation-delay:{p(3)}s;" class="star">
+        	    <figure class="star-top" />
+        	    <figure class="star-bottom" />
+        	</figure>
+		</div>
 	{/each}
 </div>
 
@@ -39,6 +40,8 @@
 		border: 0;
 		outline: none;
 		box-sizing: border-box;
+		width: var(--star-size);
+		height: var(--star-size);
 	}
 	.star {
 		display: block;
