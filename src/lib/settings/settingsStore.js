@@ -1,4 +1,5 @@
 import { localStorageStore } from '../utils/localStorageStore'
+import { writable } from 'svelte/store'
 
 export const ranges = {
     size: { min: 75, max: 250 },
@@ -11,3 +12,5 @@ const default_settings = {
 };
 
 export const settings = localStorageStore('settings', default_settings)
+
+export const showControls = writable(false)

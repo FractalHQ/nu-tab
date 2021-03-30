@@ -1,5 +1,3 @@
-import { createEventDispatcher } from 'svelte';
-
 export function clickOutside(node) {
 	const handleClick = (event) => {
 		if (

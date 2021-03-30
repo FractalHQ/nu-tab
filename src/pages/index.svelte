@@ -1,6 +1,6 @@
 <script>
 	import Collection from '../lib/ui/Collection.svelte';
-	import Search from '../lib/ui/Search.svelte';
+	import Search from '../lib/search/Search.svelte';
 </script>
 
 <!-- routify:options title="Home" -->

@@ -1,8 +1,6 @@
 <script>
-	import SettingsButton from '../lib/settings/SettingsButton.svelte';
 	import Settings from '../lib/settings/Settings.svelte';
 	import Themer from '../lib/themes/Themer.svelte';
-	import { layout, url } from '@roxi/routify';
 	import Nav from '../lib/ui/Nav.svelte';
 
 	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max));
