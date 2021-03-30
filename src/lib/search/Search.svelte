@@ -47,6 +47,7 @@
 				engines.find((engine) => engine.position === $activeEngine)
 					.position,
 			);
+			input.focus();
 		}, 0);
 	});
 
