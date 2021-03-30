@@ -1,40 +1,64 @@
 <script>
 	import DuckDuckGo from './icons/DuckDuckGo.svelte';
+	import Archive from './icons/Archive.svelte';
+	import Google from './icons/Google.svelte';
+	import Ecosia from './icons/Ecosia.svelte';
+
 	import rotateArray from '../utils/rotateArray';
 	import { activeEngine } from './searchStore';
-	import Google from './icons/Google.svelte';
 	import Icons from './Icons.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	let query = '';
 	$: engines = [
 		{
+			position: 0,
 			name: 'DuckDuckGo',
 			url: `https://duckduckgo.com/?q=${query}&ia=web`,
 			icon: DuckDuckGo,
 		},
 		{
+			position: 1,
 			name: 'Google',
 			url: `https://www.google.com/search?q=${query}`,
 			icon: Google,
 		},
+		{
+			position: 2,
+			name: 'Internet Archive',
+			url: `https://archive.org/search.php?query=${query}`,
+			icon: Archive,
+		},
+		{
+			position: 3,
+			name: 'Ecosia',
+			url: `https://www.ecosia.org/search?q=${query}`,
+			icon: Ecosia,
+		},
 	];
 
-	onMount(() => {
-		engines.rotate($activeEngine);
+	onMount(async () => {
+		setTimeout(() => {
+			engines = engines.rotate(
+				engines.find((engine) => engine.position === $activeEngine)
+					.position,
+			);
+		}, 0);
 	});
 
 	function search(e) {
-		console.log(e);
 		if (e === 'Enter') window.location.href = engines[0].url;
 	}
-	function select(index) {
-		$activeEngine = index;
-		engines.rotate(index);
+
+	function select(position) {
+		const distance = Math.abs(engines.length - $activeEngine + position);
+		$activeEngine = position;
+		engines.rotate(distance);
 		engines = engines;
 	}
 </script>
 
+Active Engine = {$activeEngine}
 <div class="search-wrapper">
 	<Icons bind:engines on:newSelection={(e) => select(e.detail.index)} />
 	<input

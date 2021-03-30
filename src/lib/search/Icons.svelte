@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import smoothHover from '../utils/smoothHover';
 	import { activeEngine } from './searchStore';
 	import { fly } from 'svelte/transition';
@@ -8,18 +8,27 @@
 
 	export let engines;
 
-	let hovering = false;
-
-	let newSelectionEvent = false;
+	let hovering = false,
+		newSelectionEvent = false,
+		readyToReset = false,
+		timer = null;
 
 	function handleSelection(index) {
+		timer && clearTimeout(timer);
 		newSelectionEvent = true;
 
 		dispatch('newSelection', { index });
 
-		setTimeout(() => {
+		timer = setTimeout(() => {
+			readyToReset = true;
+		}, 300);
+	}
+	function resetSelectionEvent() {
+		if (readyToReset) {
+			timer && clearTimeout(timer);
 			newSelectionEvent = false;
-		}, 500);
+			readyToReset = false;
+		}
 	}
 </script>
 
@@ -29,43 +38,56 @@
 	on:smoothOver={() => (hovering = true)}
 	on:smoothOut={() => (hovering = false)}
 >
-	{#each engines as { name, url, icon }, i}
+	{#each engines as { position, icon }, i}
 		{#if i === 0 || hovering}
 			{#if i === 0 || !newSelectionEvent}
-				<div
-					class="icon"
-					on:click={() => handleSelection(i)}
-					transition:fly={{ y: -10 }}
-					class:hovering
-				>
-					<svelte:component this={icon} />
-				</div>
+				{#key $activeEngine}
+					<div
+						class="icon"
+						on:click={() => handleSelection(position)}
+						in:fly={{ x: 10 * i }}
+						out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
+						class:hovering
+						on:mouseover={resetSelectionEvent}
+						style="transform: translateX(-{i * 50}px);"
+					>
+						<svelte:component this={icon} />
+					</div>
+				{/key}
 			{/if}
 		{/if}
 	{/each}
 </div>
 
 <style>
+	.icon,
+	.engines {
+		width: 2rem;
+		height: 2rem;
+	}
+
 	.icon {
 		display: flex;
-		margin-bottom: 1rem;
+		/* margin-bottom: 1rem; */
+		position: absolute;
 
 		cursor: pointer;
 
 		/* filter: saturate(0.2) contrast(0.9); */
 		opacity: 0.5;
-		transform: translate(37px);
 		transition: 0.25s;
 	}
+
 	.icon.hovering {
 		opacity: 1;
 		filter: none;
 	}
+
 	.engines {
+		transform: translate(37px);
+		position: relative;
 		display: flex;
-		flex-direction: column;
-		width: 2rem;
-		height: 2rem;
+		/* flex-direction: column; */
 		margin: auto;
 	}
 </style>
