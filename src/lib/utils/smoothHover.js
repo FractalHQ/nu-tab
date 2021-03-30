@@ -1,7 +1,7 @@
 let hovering = false;
 let timer = null
 
-export default function smoothHover(node, delay = 300) {
+export default function smoothHover(node, delay = 400) {
     function smoothOver() {
         timer && clearTimeout(timer)
         if (hovering) return

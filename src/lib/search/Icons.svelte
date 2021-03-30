@@ -1,7 +1,6 @@
 <script>
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import smoothHover from '../utils/smoothHover';
-	import { activeEngine } from './searchStore';
 	import { fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
@@ -15,6 +14,7 @@
 
 	function handleSelection(index) {
 		timer && clearTimeout(timer);
+
 		newSelectionEvent = true;
 
 		dispatch('newSelection', { index });
@@ -23,6 +23,7 @@
 			readyToReset = true;
 		}, 300);
 	}
+
 	function resetSelectionEvent() {
 		if (readyToReset) {
 			timer && clearTimeout(timer);
@@ -41,19 +42,19 @@
 	{#each engines as { position, icon }, i}
 		{#if i === 0 || hovering}
 			{#if i === 0 || !newSelectionEvent}
-				{#key $activeEngine}
-					<div
-						class="icon"
-						on:click={() => handleSelection(position)}
-						in:fly={{ x: 10 * i }}
-						out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
-						class:hovering
-						on:mouseover={resetSelectionEvent}
-						style="transform: translateX(-{i * 50}px);"
-					>
-						<svelte:component this={icon} />
-					</div>
-				{/key}
+				<!-- {#key $activeEngine} -->
+				<div
+					class="icon"
+					on:click={() => handleSelection(position)}
+					in:fly={{ x: 10 * i }}
+					out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
+					class:hovering
+					on:mouseover={resetSelectionEvent}
+					style="transform: translateX(-{i * 50}px);"
+				>
+					<svelte:component this={icon} />
+				</div>
+				<!-- {/key} -->
 			{/if}
 		{/if}
 	{/each}
@@ -62,16 +63,15 @@
 <style>
 	.icon,
 	.engines {
-		width: 2rem;
+		width: 3rem;
 		height: 2rem;
+		cursor: pointer;
 	}
 
 	.icon {
 		display: flex;
 		/* margin-bottom: 1rem; */
 		position: absolute;
-
-		cursor: pointer;
 
 		/* filter: saturate(0.2) contrast(0.9); */
 		opacity: 0.5;
@@ -84,10 +84,13 @@
 	}
 
 	.engines {
-		transform: translate(37px);
+		transform: translate(44px);
 		position: relative;
 		display: flex;
 		/* flex-direction: column; */
 		margin: auto;
+		flex-grow: 1;
+		min-width: max-content;
+		/* background: pink; */
 	}
 </style>

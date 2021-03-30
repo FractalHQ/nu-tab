@@ -14,6 +14,7 @@
 		{#each $layout.children as { path, title }}
 			<a href={path} use:$url>
 				<div
+					id="app-title"
 					style="color:rgb(var(--primary-a));"
 					in:fly={{ y: 10, duration: 1000, delay: 420 }}
 				>
@@ -39,5 +40,8 @@
 	a {
 		color: rgb(var(--dark-a));
 		text-decoration: none;
+	}
+	#app-title {
+		user-select: none;
 	}
 </style>

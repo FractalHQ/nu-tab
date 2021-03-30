@@ -6,8 +6,9 @@
 	data-test-id="logo-icon"
 	class="logo__icon"
 	data-v-0b95a186=""
-	width="100%"
-	height="100%"
+	width="90%"
+	height="90%"
+	style="margin:auto 0 auto auto"
 >
 	<g fill="none" fill-rule="evenodd" data-v-0b95a186="">
 		<path
