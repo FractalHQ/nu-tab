@@ -1,21 +1,24 @@
-export default function smoothHover(node, delay = 500) {
-    let timer = null
-    
+let hovering = false;
+let timer = null
+
+export default function smoothHover(node, delay = 300) {
     function smoothOver() {
-        console.dir('smoothOver for ', node)
         timer && clearTimeout(timer)
-        
+        if (hovering) return
+
         node.dispatchEvent(new CustomEvent('smoothOver', node));
+        hovering = true;
     }
     
     function smoothOut() {
-        console.dir('smoothOut for ', node)
-        if (timer) clearTimeout(timer)
+        timer && clearTimeout(timer)
+        if (!hovering) return
         
         timer = setTimeout(() => {
             node.classList.add('remove');
 
             node.dispatchEvent(new CustomEvent('smoothOut', node));
+            hovering = false
         }, delay)
     }
     

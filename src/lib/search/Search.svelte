@@ -1,11 +1,51 @@
 <script>
-	import Engine from './Engine.svelte';
+	import DuckDuckGo from './icons/DuckDuckGo.svelte';
+	import rotateArray from '../utils/rotateArray';
+	import { activeEngine } from './searchStore';
+	import Google from './icons/Google.svelte';
+	import Icons from './Icons.svelte';
+	import { onMount } from 'svelte';
+
+	let query = '';
+	$: engines = [
+		{
+			name: 'DuckDuckGo',
+			url: `https://duckduckgo.com/?q=${query}&ia=web`,
+			icon: DuckDuckGo,
+		},
+		{
+			name: 'Google',
+			url: `https://www.google.com/search?q=${query}`,
+			icon: Google,
+		},
+	];
+
+	onMount(() => {
+		engines.rotate($activeEngine);
+	});
+
+	function search(e) {
+		console.log(e);
+		if (e === 'Enter') window.location.href = engines[0].url;
+	}
+	function select(index) {
+		$activeEngine = index;
+		engines.rotate(index);
+		engines = engines;
+	}
 </script>
 
 <div class="search-wrapper">
-	<Engine />
-	<input type="text" id="search" />
+	<Icons bind:engines on:newSelection={(e) => select(e.detail.index)} />
+	<input
+		type="text"
+		id="search"
+		bind:value={query}
+		on:keydown={(e) => search(e.key)}
+	/>
 </div>
+
+<pre>{JSON.stringify(engines, null, 2)}</pre>
 
 <style>
 	#search {
