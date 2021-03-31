@@ -16,6 +16,7 @@
 				<div
 					id="app-title"
 					style="color:rgb(var(--primary-a));"
+					tabindex="-1"
 					in:fly={{ y: 10, duration: 1000, delay: 420 }}
 				>
 					NU
@@ -42,6 +43,9 @@
 		text-decoration: none;
 	}
 	#app-title {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
 		user-select: none;
 	}
 </style>

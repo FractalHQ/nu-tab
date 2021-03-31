@@ -4,13 +4,13 @@ const { defineConfig } = require('vite')
 module.exports = defineConfig(({ command, mode }) => {
   const isProduction = mode === 'production'
   return {
-    optimizeDeps: {
-      exclude: ['@roxi/routify']
-    },
-    // @ts-expect-error
-    plugins: [svelte()],
-    build: {
-      minify: isProduction
-    }
-  }
+		optimizeDeps: {
+			exclude: ['@roxi/routify'],
+		},
+		// @ts-expect-error
+		plugins: [svelte()],
+		build: {
+			minify: isProduction,
+		},
+  };
 })

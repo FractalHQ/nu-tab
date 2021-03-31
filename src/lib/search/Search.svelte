@@ -92,9 +92,6 @@
 </div>
 
 <style>
-	.debug {
-		position: absolute;
-	}
 	#search {
 		border: 1px solid rgba(var(--dark-b), 0.2);
 		background: rgb(var(--light-a));
