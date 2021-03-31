@@ -1,22 +1,25 @@
 <script>
-	import { bookmark_settings } from '../settings/Settings.svelte';
-
-	const { url, color, image, title } = $bookmark_settings;
+	export let bookmark;
 </script>
 
-<div
-	class="bookmark"
-	style="
-		{image ? `background-image: ${image}` : `background: ${color}`};
+<a href={bookmark.url} target="_blank">
+	<div
+		class="bookmark"
+		style="
+		{bookmark.image
+			? `background-image: url(${bookmark.image});`
+			: `background: ${bookmark.background}; color: ${bookmark.foreground}`};
 	"
->
-	<a href={url} target="_blank">
-		<p>{title}</p>
-	</a>
-</div>
+	>
+		{#if bookmark.title}
+			<p>{bookmark.title}</p>
+		{/if}
+	</div>
+</a>
 
 <style>
 	.bookmark {
+		background-size: cover;
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
@@ -28,9 +31,12 @@
 	p {
 		font-size: 20px;
 		width: 100%;
+		position: relative;
+		transform: translateY(240%);
 	}
 	a {
 		width: 100%;
 		text-decoration: none;
+		color: rgb(var(--dark-a));
 	}
 </style>

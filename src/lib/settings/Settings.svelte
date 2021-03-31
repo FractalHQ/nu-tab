@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	import { writable } from 'svelte/store';
 
 	const randomColor = () =>
@@ -10,7 +10,7 @@
 		title: '🔗',
 		description: '',
 	});
-</script>
+</script> -->
 
 <script>
 	import SettingsButton from './SettingsButton.svelte';

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Collection from '../lib/ui/Collection.svelte';
 	import Search from '../lib/search/Search.svelte';
 </script>
@@ -8,6 +8,6 @@
 
 <br />
 <Search />
-<br />
 
+<br />
 <Collection />

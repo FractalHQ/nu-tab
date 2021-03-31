@@ -1,16 +1,11 @@
 <script>
 	import Settings from '../lib/settings/Settings.svelte';
 	import Themer from '../lib/themes/Themer.svelte';
-	import SignIn from '../lib/auth/SignIn.svelte';
 	import Nav from '../lib/ui/Nav.svelte';
-	import { onMount } from 'svelte';
 
 	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max));
 
 	const rgba = (opacity = 0.1) => [r(), r(), r(), opacity];
-
-	let mounted = false;
-	onMount((mounted = true));
 </script>
 
 <div
@@ -20,9 +15,6 @@
 	<Themer size={50} />
 
 	<Nav />
-	{#if mounted}
-		<SignIn />
-	{/if}
 
 	<main>
 		<slot />

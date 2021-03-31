@@ -84,13 +84,14 @@
 	}
 
 	.engines {
-		transform: translate(44px);
+		transform: translate(1.2rem);
 		position: relative;
 		display: flex;
 		/* flex-direction: column; */
 		margin: auto;
 		flex-grow: 1;
 		min-width: max-content;
+		z-index: 2;
 		/* background: pink; */
 	}
 </style>

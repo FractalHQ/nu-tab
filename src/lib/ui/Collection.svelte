@@ -1,28 +1,36 @@
 <script>
-	import SettingsPanel from './SettingsPanel.svelte';
-
-	import Bookmark from './Bookmark.svelte';
+	import { addDefaultCollection } from '../data/transactions';
 	import { settings } from '../settings/settingsStore';
+	import SettingsPanel from './SettingsPanel.svelte';
+	import { activeCollection } from '../data/dbStore';
+	import Bookmark from './Bookmark.svelte';
+	import { onMount } from 'svelte';
 
 	const updateSetting = (setting, value) => {
 		$settings.setting = value;
 	};
+
+	onMount(() => {
+		addDefaultCollection();
+	});
 </script>
 
 <div class="collection-container">
-	{#each Array(20) as _}
-		<!-- prettier-ignore -->
-		<div
-			class="bookmark-container"
-			style="
-				width: {$settings.size}px;
-				height: {$settings.size}px;
-				margin: {$settings.gap}px;
-				"
-		>
-			<Bookmark />
-		</div>
-	{/each}
+	{#if $activeCollection.bookmarks}
+		{#each $activeCollection.bookmarks as bookmark}
+			<!-- prettier-ignore -->
+			<div
+				class="bookmark-container"
+				style="
+					width: {$settings.size}px;
+					height: {$settings.size}px;
+					margin: {$settings.gap}px;
+					"
+			>
+				<Bookmark {bookmark}/>
+			</div>
+		{/each}
+	{/if}
 </div>
 
 <SettingsPanel />

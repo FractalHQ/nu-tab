@@ -1,5 +1,5 @@
 <script>
-	import rotateArray from '../utils/rotateArray';
+	import rotate from '../utils/rotateArray';
 	import { activeEngine } from './searchStore';
 	import { onMount, tick } from 'svelte';
 	import Icons from './Icons.svelte';
@@ -85,6 +85,7 @@
 	<input
 		type="text"
 		id="search"
+		autocomplete="off"
 		bind:value={inputValue}
 		on:keydown={(e) => hotkey(e.key)}
 		bind:this={input}
@@ -104,6 +105,7 @@
 		width: 400px;
 		margin: 2rem auto;
 		box-shadow: 0 2px 5px 2px #00000010;
+		transform: translateX(-1.4rem);
 	}
 	#search:focus {
 		outline: none;
