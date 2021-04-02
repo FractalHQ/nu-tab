@@ -1,13 +1,15 @@
 let hovering = false;
 let timer = null
 
-export default function smoothHover(node, delay = 400) {
+export default function smoothHover(node, outDelay = 400, inDelay = 0) {
     function smoothOver() {
         timer && clearTimeout(timer)
         if (hovering) return
 
-        node.dispatchEvent(new CustomEvent('smoothOver', node));
-        hovering = true;
+        timer = setTimeout(() => {
+            node.dispatchEvent(new CustomEvent('smoothOver', node));
+            hovering = true;
+        }, inDelay);
     }
     
     function smoothOut() {
@@ -19,7 +21,7 @@ export default function smoothHover(node, delay = 400) {
 
             node.dispatchEvent(new CustomEvent('smoothOut', node));
             hovering = false
-        }, delay)
+        }, outDelay)
     }
     
     node.addEventListener('mouseover', smoothOver)

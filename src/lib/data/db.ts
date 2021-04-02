@@ -1,5 +1,5 @@
+import type { Collection } from './models/bookmarks/types';
 import Dexie from 'dexie';
-import type { Collection } from './types';
 
 export class BookmarkDB extends Dexie {
     collections: Dexie.Table<Collection, number>;

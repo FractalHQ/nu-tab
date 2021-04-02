@@ -2,7 +2,8 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
   	"compilerOptions": {
 		  "moduleResolution": "node",
-		  "target": "esNext",
+		  "target": "esnext",
+		  "module": "esnext",
 		  "importsNotUsedAsValues": "error",
 		  "isolatedModules": true,
 		  "sourceMap": true,

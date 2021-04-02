@@ -1,4 +1,4 @@
-import { defaultCollection } from './defaults';
+import defaultBookmarks from './models/bookmarks/defaults';
 import { activeCollection } from './dbStore';
 import db from './db';
 
@@ -23,8 +23,8 @@ function log(str: string, color: string = 'orange', font_size: number = 15, obj?
 export async function addDefaultCollection() {
     log('🎬 Adding default Bookmark Collection: ', 'lightpurple', 25);
 
-    await db.collections.add(defaultCollection);
-    activeCollection.set(defaultCollection);
+    await db.collections.add(defaultBookmarks);
+    activeCollection.set(defaultBookmarks);
 
     log('🏁 Add Defaults Complete', 'lightpurple', 25);
 }

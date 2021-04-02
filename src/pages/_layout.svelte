@@ -1,10 +1,20 @@
 <script>
+	import { showLoginPopup, authStore } from '../lib/auth/authStore';
+	import LoginPopup from '../lib/auth/LoginPopup.svelte';
+	import Modal from '../lib/ui/Modal.svelte';
+	import { onMount } from 'svelte';
+
 	import Settings from '../lib/settings/Settings.svelte';
 	import Themer from '../lib/themes/Themer.svelte';
 	import Nav from '../lib/ui/Nav.svelte';
 
-	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max));
+	const { initAuth } = authStore;
 
+	onMount(() => {
+		initAuth();
+	});
+
+	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max));
 	const rgba = (opacity = 0.1) => [r(), r(), r(), opacity];
 </script>
 
@@ -22,6 +32,10 @@
 
 	<Settings />
 </div>
+
+<Modal bind:showModal={$showLoginPopup}>
+	<LoginPopup />
+</Modal>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
