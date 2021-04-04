@@ -2,7 +2,7 @@
 	import type { Bookmark } from '../data/models/bookmarks/types';
 	import { createEventDispatcher } from 'svelte';
 
-	import { scale } from 'svelte/transition';
+	import { scale, fly } from 'svelte/transition';
 	import Edit from '../icons/Edit.svelte';
 	import { settings } from '../settings/settingsStore';
 
@@ -55,6 +55,7 @@
 	{/if}
 	<a target="_blank" href={url}>
 		<div
+			transition:scale={{ duration: 200 + 50 * i }}
 			class="bookmark"
 			style="background: {background}; color: {foreground};"
 		>

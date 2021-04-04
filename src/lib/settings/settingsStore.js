@@ -8,9 +8,9 @@ export const ranges = {
 };
 
 const default_settings = {
-	size: 100,
-    gap: 10,
-    iconSize: 10,
+	size: 75,
+    gap: 25,
+    iconSize: 50,
 };
 
 export const settings = localStorageStore('settings', default_settings)
