@@ -2,7 +2,7 @@
 	import { addDefaultCollection } from '../data/transactions';
 	import { settings } from '../settings/settingsStore';
 	import BookmarkEditor from './BookmarkEditor.svelte';
-	import SettingsPanel from './SettingsPanel.svelte';
+	import SettingsPanel from '../settings/SettingsPanel.svelte';
 	import { activeCollection } from '../data/dbStore';
 	import Bookmark from './Bookmark.svelte';
 	import Modal from './Modal.svelte';
@@ -41,7 +41,7 @@
 					width: {$settings.size}px;
 					height: {$settings.size}px;
 					margin: {$settings.gap}px;
-					"
+				"
 			>
 				<Bookmark {bookmark} {i} on:showEditor={(e) => showEditor(e.detail.index)}/>
 			</div>
@@ -61,6 +61,7 @@
 		max-width: 80vw;
 		flex-wrap: wrap;
 		margin: 0 auto;
+		margin-top: 5%;
 		display: grid;
 		contain: none;
 		display: flex;

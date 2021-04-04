@@ -8,6 +8,7 @@
 	import Archive from './icons/Archive.svelte';
 	import Google from './icons/Google.svelte';
 	import Ecosia from './icons/Ecosia.svelte';
+	import MDN from './icons/MDN.svelte';
 
 	$: engines = [
 		{
@@ -33,6 +34,12 @@
 			name: 'Ecosia',
 			url: `https://www.ecosia.org/search?q=`,
 			icon: Ecosia,
+		},
+		{
+			position: 4,
+			name: 'MDN',
+			url: `https://developer.mozilla.org/en-US/search?q=`,
+			icon: MDN,
 		},
 	];
 

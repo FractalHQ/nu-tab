@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
+	import type { Bookmark } from '../data/models/bookmarks/types';
 	import { createEventDispatcher } from 'svelte';
 
 	import { scale } from 'svelte/transition';
 	import Edit from '../icons/Edit.svelte';
+	import { settings } from '../settings/settingsStore';
 
 	export let i;
 	export let bookmark;
@@ -25,6 +27,16 @@
 			showEditIcon = false;
 		}, delay);
 	}
+
+	const {
+		url,
+		tags,
+		title,
+		image,
+		background,
+		foreground,
+		description,
+	} = bookmark;
 </script>
 
 <div
@@ -41,17 +53,21 @@
 			<Edit />
 		</div>
 	{/if}
-	<a target="_blank" href={bookmark.url}>
+	<a target="_blank" href={url}>
 		<div
 			class="bookmark"
-			style="
-			{bookmark.image
-				? `background-image: url(${bookmark.image});`
-				: `background: ${bookmark.background}; color: ${bookmark.foreground}`};
-		"
+			style="background: {background}; color: {foreground};"
 		>
-			{#if bookmark.title}
-				<p>{bookmark.title}</p>
+			{#if image}
+				<img
+					style="width:{$settings.iconSize}px"
+					class="icon"
+					src={image}
+					alt={title}
+				/>
+			{/if}
+			{#if title}
+				<p>{title}</p>
 			{/if}
 		</div>
 	</a>
@@ -63,21 +79,31 @@
 		width: 100%;
 	}
 	.bookmark {
-		background-size: cover;
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
 		align-items: center;
+		justify-content: flex-end;
 		text-align: center;
 		display: flex;
+		flex-direction: column;
 		position: relative;
+	}
+	.icon {
+		max-width: 100%;
+		max-height: 100%;
+		bottom: 0;
+		top: 0;
+		display: flex;
+		margin: auto;
 	}
 
 	p {
-		font-size: 20px;
+		font-size: 18px;
 		width: 100%;
-		position: relative;
-		transform: translateY(240%);
+		position: absolute;
+		transform: translateY(200%);
+		color: rgb(var(--dark-c));
 	}
 
 	a {

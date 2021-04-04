@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition';
 
 	import { settings, ranges, showControls } from '../settings/settingsStore';
-	import Range from './Range.svelte';
+	import Range from '../ui/Range.svelte';
 
 	const updateSetting = (setting, value) => {
 		$settings.setting = value;

@@ -2,13 +2,15 @@ import { localStorageStore } from '../utils/localStorageStore'
 import { writable } from 'svelte/store'
 
 export const ranges = {
-    size: { min: 75, max: 250 },
-    gap: { min: 0, max: 100 },
-}
+	size: { min: 75, max: 250 },
+	gap: { min: 0, max: 100 },
+    iconSize: {min: 0, max: 150},
+};
 
 const default_settings = {
 	size: 100,
-	gap: 10,
+    gap: 10,
+    iconSize: 10,
 };
 
 export const settings = localStorageStore('settings', default_settings)
