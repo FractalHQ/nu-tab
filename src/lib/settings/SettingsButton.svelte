@@ -1,5 +1,5 @@
 <script>
-	import { showControls } from './settingsStore';
+	import { showSettings } from './settingsStore';
 </script>
 
 <div class="settings-button">
@@ -8,7 +8,7 @@
 		<div class="bar" />
 		<div class="bar" />
 	</div>
-	<div class="gear" on:click={() => ($showControls = !$showControls)}>⚙</div>
+	<div class="gear" on:click={() => ($showSettings = !$showSettings)}>⚙</div>
 </div>
 
 <style>

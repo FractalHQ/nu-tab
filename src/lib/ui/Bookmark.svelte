@@ -2,9 +2,9 @@
 	import type { Bookmark } from '../data/models/bookmarks/types';
 	import { createEventDispatcher } from 'svelte';
 
-	import { scale, fly } from 'svelte/transition';
-	import Edit from '../icons/Edit.svelte';
 	import { settings } from '../settings/settingsStore';
+	import { scale, fly, fade } from 'svelte/transition';
+	import Edit from '../icons/Edit.svelte';
 
 	export let i;
 	export let bookmark;
@@ -57,18 +57,25 @@
 		<div
 			transition:scale={{ duration: 200 + 50 * i }}
 			class="bookmark"
-			style="background: {background}; color: {foreground};"
+			style="
+				background: {$settings.transparent
+				? 'transparent'
+				: background};
+				color: {$settings.transparent
+				? 'transparent'
+				: foreground};
+				"
 		>
 			{#if image}
 				<img
-					style="width:{$settings.iconSize}px"
+					style="width:{$settings.icon}px"
 					class="icon"
 					src={image}
 					alt={title}
 				/>
 			{/if}
-			{#if title}
-				<p>{title}</p>
+			{#if title && $settings.showTitle}
+				<p transition:fade={{ duration: 150 }}>{title}</p>
 			{/if}
 		</div>
 	</a>
@@ -97,6 +104,7 @@
 		top: 0;
 		display: flex;
 		margin: auto;
+		user-select: none;
 	}
 
 	p {
@@ -116,8 +124,8 @@
 
 	.edit {
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: 3px;
+		top: 3px;
 		width: max-content;
 		height: max-content;
 		z-index: 5;

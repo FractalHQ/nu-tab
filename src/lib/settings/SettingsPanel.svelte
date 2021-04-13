@@ -1,18 +1,24 @@
 <script>
 	import { fly } from 'svelte/transition';
 
-	import { settings, ranges, showControls } from '../settings/settingsStore';
+	import { settings, ranges, showSettings } from '../settings/settingsStore';
 	import Range from '../ui/Range.svelte';
+	import { clickOutside } from '../utils/clickOutside';
 
 	const updateSetting = (setting, value) => {
 		$settings.setting = value;
 	};
 </script>
 
-{#if $showControls}
-	<div class="control-panel" transition:fly={{ y: 500, opacity: 1 }}>
+{#if $showSettings}
+	<div
+		class="control-panel"
+		transition:fly={{ y: 500, opacity: 1 }}
+		use:clickOutside
+		on:click_outside={() => ($showSettings = false)}
+	>
 		<div class="controls">
-			{#each Object.keys($settings) as setting}
+			{#each Object.keys(ranges) as setting}
 				<div class="control">
 					<label for={setting}>{setting}</label>
 					<Range
@@ -23,6 +29,10 @@
 					/>
 				</div>
 			{/each}
+			<label for="showTitle">
+				Show Title
+				<input type="checkbox" bind:checked={$settings.showTitle} />
+			</label>
 		</div>
 	</div>
 {/if}
@@ -50,6 +60,7 @@
 		height: 200px;
 		width: 75%;
 		margin: auto;
+		margin-top: 50px;
 	}
 	.control {
 		border: 1px solid rgba(var(--light-c), 0.33);
@@ -58,7 +69,7 @@
 		padding: 2px 15px;
 		/* margin: 20px; */
 		display: flex;
-		margin: 40px 0;
+		margin: 20px 0;
 		font-size: 20px;
 		justify-content: space-between;
 		background: rgba(var(--light-b), 0.33);
@@ -67,5 +78,15 @@
 		height: 100%;
 		margin: auto 0;
 		width: max-content;
+		position: relative;
+	}
+	input[type='checkbox'] {
+		margin: auto;
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: -50%;
 	}
 </style>
