@@ -1,4 +1,4 @@
-import { localStorageStore } from '../utils/localStorageStore'
+import { localStorageStore } from '../utils/asyncLocalStorageStore'
 import { writable } from 'svelte/store'
 
 export const ranges = {
