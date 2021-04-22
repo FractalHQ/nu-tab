@@ -1,14 +1,15 @@
 <script>
-	import rotate from '../utils/rotateArray';
 	import { activeEngine } from './searchStore';
+	import rotate from '../utils/rotateArray';
 	import { onMount, tick } from 'svelte';
 	import Icons from './Icons.svelte';
 
+	import StackOverflow from './icons/StackOverflow.svelte';
 	import DuckDuckGo from './icons/DuckDuckGo.svelte';
 	import Archive from './icons/Archive.svelte';
 	import Google from './icons/Google.svelte';
-	// import Ecosia from './icons/Ecosia.svelte';
 	import MDN from './icons/MDN.svelte';
+	import HackerNews from './icons/HackerNews.svelte';
 
 	$: engines = [
 		{
@@ -29,17 +30,23 @@
 			url: `https://archive.org/search.php?query=`,
 			icon: Archive,
 		},
-		// {
-		// 	position: 3,
-		// 	name: 'Ecosia',
-		// 	url: `https://www.ecosia.org/search?q=`,
-		// 	icon: Ecosia,
-		// },
 		{
 			position: 3,
 			name: 'MDN',
 			url: `https://developer.mozilla.org/en-US/search?q=`,
 			icon: MDN,
+		},
+		{
+			position: 4,
+			name: 'StackOverflow',
+			url: `https://stackoverflow.com/search?q=`,
+			icon: StackOverflow,
+		},
+		{
+			position: 5,
+			name: 'HackerNews',
+			url: `https://hn.algolia.com/?query=`,
+			icon: HackerNews,
 		},
 	];
 
@@ -104,7 +111,7 @@
 		border: 1px solid rgba(var(--dark-b), 0.2);
 		background: rgb(var(--light-a));
 		color: rgb(var(--dark-a));
-		padding: 0.75rem 25px 0.7rem 4rem;
+		padding: 0.75rem 25px 0.7rem 3.5rem;
 		border-radius: 20px;
 		text-align: justify;
 		line-height: 100%;

@@ -19,7 +19,7 @@ const asyncLocalStorage = {
 };
 
 // Adapted from https://svelte.dev/repl/7b4d6b448f8c4ed2b3d5a3c31260be2a?version=3.34.0
-export const localStorageStore = (key, value) => {
+export const asyncLocalStorageStore = (key, value) => {
 	const { set: setStore, ...readableStore } = writable(value, () => {
 		if (!client) return;
 

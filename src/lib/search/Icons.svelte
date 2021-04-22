@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import smoothHover from '../utils/smoothHover';
+	import Tooltip from '../ui/Tooltip.svelte';
 	import { fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
@@ -39,10 +40,9 @@
 	on:smoothOver={() => (hovering = true)}
 	on:smoothOut={() => (hovering = false)}
 >
-	{#each engines as { position, icon }, i}
+	{#each engines as { position, icon, name }, i}
 		{#if i === 0 || hovering}
 			{#if i === 0 || !newSelectionEvent}
-				<!-- {#key $activeEngine} -->
 				<div
 					class="icon"
 					on:click={() => handleSelection(position)}
@@ -52,9 +52,10 @@
 					on:mouseover={resetSelectionEvent}
 					style="transform: translateX(-{i * 50}px);"
 				>
-					<svelte:component this={icon} />
+					<Tooltip content={name} placement="bottom">
+						<svelte:component this={icon} />
+					</Tooltip>
 				</div>
-				<!-- {/key} -->
 			{/if}
 		{/if}
 	{/each}
@@ -69,13 +70,13 @@
 	}
 
 	.icon {
-		display: flex;
 		/* margin-bottom: 1rem; */
 		position: absolute;
+		display: flex;
 
 		/* filter: saturate(0.2) contrast(0.9); */
-		opacity: 0.5;
 		transition: 0.25s;
+		opacity: 0.5;
 	}
 
 	.icon.hovering {

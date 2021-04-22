@@ -10,6 +10,8 @@
 	};
 </script>
 
+<div class="mousetrap" on:mouseover={() => ($showSettings = true)} />
+
 {#if $showSettings}
 	<div
 		class="control-panel"
@@ -88,5 +90,14 @@
 		top: 0;
 		bottom: 0;
 		right: -50%;
+	}
+	.mousetrap {
+		height: 50px;
+		width: 600px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		position: absolute;
+		margin: auto;
 	}
 </style>
