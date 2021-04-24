@@ -1,62 +1,20 @@
 <script>
+	import { defaultEngines } from './Engines.svelte';
 	import { activeEngine } from './searchStore';
 	import rotate from '../utils/rotateArray';
 	import { onMount, tick } from 'svelte';
 	import Icons from './Icons.svelte';
 
-	import StackOverflow from './icons/StackOverflow.svelte';
-	import DuckDuckGo from './icons/DuckDuckGo.svelte';
-	import Archive from './icons/Archive.svelte';
-	import Google from './icons/Google.svelte';
-	import MDN from './icons/MDN.svelte';
-	import HackerNews from './icons/HackerNews.svelte';
-
-	$: engines = [
-		{
-			position: 0,
-			name: 'DuckDuckGo',
-			url: `https://duckduckgo.com/?q=`,
-			icon: DuckDuckGo,
-		},
-		{
-			position: 1,
-			name: 'Google',
-			url: `https://www.google.com/search?q=`,
-			icon: Google,
-		},
-		{
-			position: 2,
-			name: 'Internet Archive',
-			url: `https://archive.org/search.php?query=`,
-			icon: Archive,
-		},
-		{
-			position: 3,
-			name: 'MDN',
-			url: `https://developer.mozilla.org/en-US/search?q=`,
-			icon: MDN,
-		},
-		{
-			position: 4,
-			name: 'StackOverflow',
-			url: `https://stackoverflow.com/search?q=`,
-			icon: StackOverflow,
-		},
-		{
-			position: 5,
-			name: 'HackerNews',
-			url: `https://hn.algolia.com/?query=`,
-			icon: HackerNews,
-		},
-	];
-
 	let input;
-
+	let engines = Array.from(defaultEngines);
+	$: engines;
 	$: inputValue = '';
 	$: query = engines[0].url + inputValue;
 
+	// Rotate array based on users default setting.
 	onMount(async () => {
 		setTimeout(() => {
+			// @ts-expect-error
 			engines = engines.rotate(
 				engines.find((engine) => engine.position === $activeEngine)
 					.position,
@@ -65,6 +23,7 @@
 		}, 0);
 	});
 
+	// Key commands
 	function hotkey(e) {
 		switch (e) {
 			case 'Enter':
@@ -81,6 +40,7 @@
 		}
 	}
 
+	// Icon Position
 	function select(position) {
 		if (position < 0) {
 			position = engines.length - 1;

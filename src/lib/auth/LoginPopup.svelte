@@ -1,8 +1,8 @@
 <script>
-	import { authStore } from './authStore';
 	// import { updateAllCollectionsList } from '../data/db';
 	import { fly, slide } from 'svelte/transition';
 	import AuthForm from './AuthForm.svelte';
+	import { authStore } from './authStore';
 
 	const {
 		githubSignIn,

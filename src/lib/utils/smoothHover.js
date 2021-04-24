@@ -3,8 +3,8 @@ let timer = null
 
 export default function smoothHover(node, outDelay = 400, inDelay = 0) {
     function smoothOver() {
-        timer && clearTimeout(timer)
-        if (hovering) return
+        timer && clearTimeout(timer);
+        if (hovering) return;
 
         timer = setTimeout(() => {
             node.dispatchEvent(new CustomEvent('smoothOver', node));
@@ -13,25 +13,25 @@ export default function smoothHover(node, outDelay = 400, inDelay = 0) {
     }
     
     function smoothOut() {
-        timer && clearTimeout(timer)
-        if (!hovering) return
+        timer && clearTimeout(timer);
+        if (!hovering) return;
         
         timer = setTimeout(() => {
             node.classList.add('remove');
 
             node.dispatchEvent(new CustomEvent('smoothOut', node));
-            hovering = false
-        }, outDelay)
-    }
+            hovering = false;
+        }, outDelay);
+    };
     
-    node.addEventListener('mouseover', smoothOver)
-    node.addEventListener('mouseout', smoothOut)
+    node.addEventListener('mouseover', smoothOver);
+    node.addEventListener('mouseout', smoothOut);
     
     return {
         destroy() {
-            timer && clearTimeout(timer)
-            node.removeEventListener('mouseover', smoothOver)
-            node.removeEventListener('mouseout', smoothOut)
+            timer && clearTimeout(timer);
+            node.removeEventListener('mouseover', smoothOver);
+            node.removeEventListener('mouseout', smoothOut);
         }
     }
 }
