@@ -7,7 +7,7 @@
 
 	let input;
 	let engines = Array.from(defaultEngines);
-	let startPosition, originalPosition;
+	let startPosition;
 
 	$: engines;
 	$: aliases = [];
@@ -18,7 +18,6 @@
 		setTimeout(() => {
 			rotateEngines();
 			startPosition = $activeEngine;
-			originalPosition = startPosition;
 			getAliases();
 		}, 0);
 	});
@@ -33,8 +32,8 @@
 		select(engines.find((engine) => engine.alias == inputValue).position);
 	}
 	function deselectAlias() {
-		console.log('Rotating to OG position: ', originalPosition);
-		select(originalPosition);
+		console.log('Rotating to OG position: ', startPosition);
+		select(startPosition);
 	}
 
 	$: if (!aliases.includes(inputValue)) {
@@ -70,8 +69,6 @@
 		}
 		const distance = Math.abs(engines.length - $activeEngine + position);
 		$activeEngine = position;
-		// startPosition = distance;
-		// originalPosition = startPosition;
 		engines = engines.rotate(distance);
 		input.focus();
 	}
@@ -84,14 +81,16 @@
 		engines = engines.rotate(targetPosition);
 		input.focus();
 	}
+
+	const debug = false;
 </script>
 
-$activeEngine: {$activeEngine}
-<br />
-originalPosition: {originalPosition}
-<br />
-targetPosition: {startPosition}
-<br />
+{#if debug}
+	$activeEngine: {$activeEngine}
+	<br />
+	targetPosition: {startPosition}
+	<br />
+{/if}
 
 <div class="search-wrapper">
 	<Icons bind:engines on:newSelection={(e) => select(e.detail.index)} />
