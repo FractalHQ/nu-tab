@@ -13,6 +13,7 @@ module.exports = defineConfig(({ command, mode }) => {
 		plugins: [
 			// @ts-expect-error
 			svelte(),
+			// @ts-expect-error
 			replace({
 				preventAssignment: true,
 				'process.browser': true,

@@ -9,7 +9,8 @@
     "build:routify": "routify run -b",
     "build:vite": "vite build",
     "serve": "vite preview",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "comb": "npx csscomb comb.css --config comb.json"
   },
   "dependencies": {
     "@roxi/routify": "^2.15.1"

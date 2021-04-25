@@ -1,0 +1,58 @@
+.tooltipText.hovering {
+   transition-delay: opacity 1.5s, transform .2s;
+
+   opacity: 1;
+}
+.tooltipText {
+   font-family: var(--font);
+
+   position: absolute;
+
+   transition: .2s ease-out;
+   transition-delay: opacity .5s, transform .2s;
+   transform: translate(1em, 50px);
+   text-align: center;
+   white-space: nowrap;
+   letter-spacing: .3em;
+
+   opacity: 0;
+   color: rgb(var(--dark-d));
+}
+.icon,
+.engines {
+   position: relative;
+
+   width: 3rem;
+   height: 2rem;
+
+   cursor: pointer;
+}
+
+.icon {
+   position: absolute;
+
+   display: flex;
+
+   transition: .25s;
+
+   opacity: .5;
+}
+
+.icon.hovering {
+   opacity: 1;
+
+   filter: none;
+}
+
+.engines {
+   position: relative;
+   z-index: 2;
+
+   display: flex;
+   flex-grow: 1;
+
+   min-width: max-content;
+   margin: auto;
+
+   transform: translate(1.2rem);
+}

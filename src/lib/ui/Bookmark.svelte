@@ -8,23 +8,25 @@
 
 	export let i;
 	export let bookmark;
+	export let hovering;
 
 	const dispatch = createEventDispatcher();
 
 	let timer = null,
-		showEditIcon = false;
+		showEditIcon = false,
+		expandEditIcon = false;
 
-	function smoothOver(delay) {
+	function smoothOver(delay, bool) {
 		timer && clearTimeout(timer);
 		timer = setTimeout(() => {
-			showEditIcon = true;
+			bool = true;
 		}, delay);
 	}
 
-	function smoothOut(delay) {
+	function smoothOut(delay, bool) {
 		timer && clearTimeout(timer);
 		timer = setTimeout(() => {
-			showEditIcon = false;
+			bool = false;
 		}, delay);
 	}
 
@@ -41,12 +43,15 @@
 
 <div
 	class="bookmark-container"
-	on:mouseover={() => smoothOver(250)}
-	on:mouseout={() => smoothOut(300)}
+	on:mouseover={() => smoothOver(500, showEditIcon)}
+	on:mouseout={() => smoothOut(300, showEditIcon)}
 >
 	{#if showEditIcon}
 		<div
+			on:mouseover={() => smoothOver(500, expandEditIcon)}
+			on:mouseout={() => smoothOut(300, expandEditIcon)}
 			class="edit"
+			class:expand={expandEditIcon}
 			transition:scale={{ duration: 150 }}
 			on:click|preventDefault={() => dispatch('showEditor', { index: i })}
 		>
@@ -74,7 +79,7 @@
 					alt={title}
 				/>
 			{/if}
-			{#if title && $settings.showTitle}
+			{#if (title && $settings.showTitle) || hovering == i}
 				<p transition:fade={{ duration: 150 }}>{title}</p>
 			{/if}
 		</div>
@@ -112,7 +117,8 @@
 		width: 100%;
 		position: absolute;
 		transform: translateY(200%);
-		color: rgb(var(--dark-c));
+		color: rgb(var(--dark-d));
+		letter-spacing: 2px;
 	}
 
 	a {

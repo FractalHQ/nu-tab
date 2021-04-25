@@ -4,7 +4,8 @@
 		  "moduleResolution": "node",
 		  "target": "esnext",
 		  "module": "esnext",
-		  "importsNotUsedAsValues": "error",
+          // "importsNotUsedAsValues": "error",
+		  "importsNotUsedAsValues": "remove", // https://github.com/IBM/carbon-icons-svelte/blob/48b23ff33c7b25893cade31716d131e1da0e9ea2/examples/rollup-typescript/tsconfig.json#L5
 		  "isolatedModules": true,
 		  "sourceMap": true,
 		  "esModuleInterop": true,
@@ -14,7 +15,8 @@
 		  "allowJs": true,
 		  "checkJs": true,
     },
+    "types": ["node", "svelte"],
 
-  "include": ["src/**/*"],
+  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }

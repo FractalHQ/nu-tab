@@ -1,8 +1,8 @@
 <script>
 	import { addDefaultCollection } from '../data/transactions';
 	import { settings } from '../settings/settingsStore';
-	import BookmarkEditor from './BookmarkEditor.svelte';
 	import SettingsPanel from '../settings/SettingsPanel.svelte';
+	import BookmarkEditor from './BookmarkEditor.svelte';
 	import { activeCollection } from '../data/dbStore';
 	import Bookmark from './Bookmark.svelte';
 	import Modal from './Modal.svelte';
@@ -13,6 +13,7 @@
 	};
 
 	let showModal = false;
+	let hovering = null;
 
 	onMount(() => {
 		addDefaultCollection();
@@ -42,8 +43,10 @@
 					height: {$settings.size}px;
 					margin: {$settings.gap}px;
 				"
+                on:mouseover={() => hovering = i}
+                on:mouseout={() => hovering = null}
 			>
-				<Bookmark {bookmark} {i} on:showEditor={(e) => showEditor(e.detail.index)}/>
+				<Bookmark {bookmark} {hovering} {i} on:showEditor={(e) => showEditor(e.detail.index)}/>
 			</div>
 		{/each}
 	{/if}

@@ -1,8 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	// import smoothHover from '../utils/smoothHover';
-	import { slide, fly } from 'svelte/transition';
-	import Tooltip from '../ui/Tooltip.svelte';
+	import { fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 	export let engines = [];
@@ -61,16 +59,7 @@
 		tooltipText = engines[i].name;
 		activeIndex = i;
 	}
-
-	let mouseX = 0,
-		mouseY = 0;
-	function handleMouse(e) {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-	}
 </script>
-
-<svelte:window on:mousemove={(e) => handleMouse(e)} />
 
 <div
 	class="engines"
@@ -90,8 +79,6 @@
 					on:mouseover={() => handleMouseOver(i)}
 				>
 					<svelte:component this={icon} />
-					<!-- <Tooltip content={name} placement="bottom"> -->
-					<!-- </Tooltip> -->
 				</div>
 			{/if}
 		{/if}
@@ -110,53 +97,61 @@
 
 <style>
 	.tooltipText.hovering {
-		opacity: 1;
 		transition-delay: opacity 1.5s, transform 0.2s;
-		transform: translate(1em, 50px);
+
+		opacity: 1;
 	}
 	.tooltipText {
+		font-family: var(--font);
+
+		position: absolute;
+
+		transition: 0.2s ease-out;
+		transition-delay: opacity 0.5s, transform 0.2s;
+		transform: translate(1em, 50px);
+		text-align: center;
 		white-space: nowrap;
+		letter-spacing: 0.3em;
+
 		opacity: 0;
 		color: rgb(var(--dark-d));
-		transition-delay: opacity 0.5s, transform 0.2s;
-		position: absolute;
-		text-align: center;
-		font-family: var(--font);
-		letter-spacing: 0.3em;
-		transition: 0.2s ease-out;
-		/* width: max-content; */
-		/* right: 0; */
-		/* top: 3em; */
-		/* left: 5em; */
 	}
 	.icon,
 	.engines {
+		position: relative;
+
 		width: 3rem;
 		height: 2rem;
+
 		cursor: pointer;
-		position: relative;
 	}
 
 	.icon {
 		position: absolute;
+
 		display: flex;
 
 		transition: 0.25s;
+
 		opacity: 0.5;
 	}
 
 	.icon.hovering {
 		opacity: 1;
+
 		filter: none;
 	}
 
 	.engines {
-		transform: translate(1.2rem);
 		position: relative;
-		display: flex;
-		margin: auto;
-		flex-grow: 1;
-		min-width: max-content;
 		z-index: 2;
+
+		display: flex;
+		flex-grow: 1;
+
+		min-width: max-content;
+		margin: auto;
+
+		transform: translate(1.2rem);
 	}
 </style>
