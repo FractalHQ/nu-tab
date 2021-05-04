@@ -2,7 +2,7 @@
 	style="margin:auto"
 	width="110%"
 	height="110%"
-	viewBox="0 0 47 47"
+	viewBox="0 1.5 47 47"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
