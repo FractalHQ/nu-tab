@@ -6,7 +6,8 @@
 <Router {routes} />
 
 <style global>
-	:global(html, body) {
+	:global(html),
+	:global(body) {
 		margin: 0;
 	}
 </style>

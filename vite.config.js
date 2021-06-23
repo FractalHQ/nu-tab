@@ -1,4 +1,4 @@
-const svelte = require('@sveltejs/vite-plugin-svelte');
+const { svelte } = require('@sveltejs/vite-plugin-svelte');
 const { defineConfig } = require('vite');
 
 const replace = require('@rollup/plugin-replace');
@@ -11,7 +11,6 @@ module.exports = defineConfig(({ command, mode }) => {
 			exclude: ['@roxi/routify'],
 		},
 		plugins: [
-			// @ts-expect-error
 			svelte(),
 			// @ts-expect-error
 			replace({

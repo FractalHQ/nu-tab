@@ -1,6 +1,6 @@
 import type { Collection } from './types'
-import cuid from 'cuid'
 import getIcon from './besticon'
+import cuid from 'cuid'
 
 // TODO:
 let todo = "Generate a random svg or something"

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Bookmark } from '../data/models/bookmarks/types';
+	// import type { Bookmark } from '../data/types';
 	import { createEventDispatcher } from 'svelte';
 
 	import { settings } from '../settings/settingsStore';
@@ -30,15 +30,8 @@
 		}, delay);
 	}
 
-	const {
-		url,
-		tags,
-		title,
-		image,
-		background,
-		foreground,
-		description,
-	} = bookmark;
+	const { url, tags, title, image, background, foreground, description } =
+		bookmark;
 </script>
 
 <div
@@ -63,12 +56,8 @@
 			transition:scale={{ duration: 200 + 50 * i }}
 			class="bookmark"
 			style="
-				background: {$settings.transparent
-				? 'transparent'
-				: background};
-				color: {$settings.transparent
-				? 'transparent'
-				: foreground};
+				background: {$settings.transparent ? 'transparent' : background};
+				color: {$settings.transparent ? 'transparent' : foreground};
 				"
 		>
 			{#if image}

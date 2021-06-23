@@ -1,4 +1,4 @@
-import type { Collection } from './models/bookmarks/types';
+import type { Collection } from './types'
 import Dexie from 'dexie';
 
 export class BookmarkDB extends Dexie {
