@@ -1,8 +1,10 @@
 <script>
-	import Button from "./Button.svelte";
+	import Button from './Button.svelte'
 
-	export let editorSettings = {};
-	let debug = false;
+	export let editorSettings = {}
+	let descriptionHover = false
+	$: placeholder = descriptionHover ? 'description' : '+'
+	let debug = false
 </script>
 
 {#if debug}
@@ -10,62 +12,49 @@
 {/if}
 
 <div class="settings-container">
-	<img
-		name="image"
-		src={editorSettings["image"]}
-		alt={editorSettings["title"]}
-	/>
+	<img name="image" src={editorSettings['image']} alt={editorSettings['title']} />
 
 	<div class="setting">
-		<div
-			id="title"
-			contenteditable
-			bind:innerHTML={editorSettings["title"]}
-		/>
+		<div id="title" contenteditable bind:innerHTML={editorSettings['title']} />
 	</div>
 
 	<div class="setting">
 		<!-- <label for='description'>description</label> -->
 		<input
 			name="description"
-			placeholder="description"
+			{placeholder}
 			type="text"
-			bind:value={editorSettings["description"]}
+			bind:value={editorSettings['description']}
+			on:mouseover={() => (descriptionHover = true)}
+			on:mouseout={() => (descriptionHover = false)}
 		/>
 	</div>
 
 	<div class="setting">
 		<label for="url">url</label>
-		<input name="url" type="text" bind:value={editorSettings["url"]} />
+		<input name="url" type="text" bind:value={editorSettings['url']} />
 	</div>
 
 	<div class="setting">
 		<label for="tags">tags</label>
-		<input name="tags" type="text" bind:value={editorSettings["tags"]} />
+		<input name="tags" type="text" bind:value={editorSettings['tags']} />
 	</div>
 
 	<div class="buttons">
+		<Button>Cancel</Button>
 		<Button>Save</Button>
 	</div>
 
-	{#if editorSettings["image"] === null}
+	{#if editorSettings['image'] === null}
 		<div class="colors">
 			<div class="setting">
 				<label for="background">background</label>
-				<input
-					name="background"
-					type="color"
-					bind:value={editorSettings["background"]}
-				/>
+				<input name="background" type="color" bind:value={editorSettings['background']} />
 			</div>
 
 			<div class="setting">
 				<label for="foreground">foreground</label>
-				<input
-					name="foreground"
-					type="color"
-					bind:value={editorSettings["foreground"]}
-				/>
+				<input name="foreground" type="color" bind:value={editorSettings['foreground']} />
 			</div>
 		</div>
 	{/if}
@@ -84,12 +73,23 @@
 		background: rgb(var(--light-a));
 		box-shadow: 0 5px 15px 5px #00000011;
 	}
+
 	.setting {
 		display: flex;
 		justify-content: space-around;
 
 		font-size: 1.3rem;
 	}
+
+	.buttons {
+		display: flex;
+
+		width: max-content;
+		margin: 1rem auto;
+
+		gap: 1rem;
+	}
+
 	label {
 		width: 20%;
 		margin: auto 0;
@@ -98,12 +98,13 @@
 
 		text-align: right;
 	}
+
 	input {
 		width: 70%;
 		margin: 0.5rem 1rem;
 		padding: 7px 8px 5px 8px;
 
-		font-family: "Abel";
+		font-family: 'Abel';
 		font-size: 1rem;
 
 		color: rgb(var(--dark-a));
@@ -112,30 +113,44 @@
 		outline: none;
 		background: rgb(var(--light-a));
 	}
+
 	input:focus {
 		border: 1px solid rgba(var(--light-b), 1);
 	}
-	input[name="url"] {
+
+	input[name='url'] {
 		font-family: monospace;
 	}
-	input[name="description"] {
+
+	input[name='description'] {
 		margin: 0 auto 1rem auto;
 
 		color: rgba(var(--dark-d), 0.75);
 
 		text-align: center;
 	}
-	input[type="color"] {
+
+	input[name='description']::placeholder {
+		color: rgba(var(--dark-d), 0.3);
+	}
+	input[name='description']:hover::placeholder {
+		content: 'description';
+	}
+
+	input[type='color'] {
 		width: 50px;
 	}
-	label[for="foreground"],
-	label[for="background"] {
+
+	label[for='foreground'],
+	label[for='background'] {
 		width: max-content;
 	}
+
 	.colors {
 		display: flex;
 		justify-content: space-evenly;
 	}
+
 	img {
 		display: flex;
 
@@ -143,6 +158,7 @@
 		height: 100px;
 		margin: 2rem auto 0 auto;
 	}
+
 	#title {
 		margin: 0 auto 0 auto;
 		padding: 0.2rem 0.7rem;
@@ -151,9 +167,11 @@
 		outline-color: rgba(var(--dark-d), 0.2);
 		outline-width: 0.5;
 	}
+
 	#title:focus {
 		/* border: 1px solid rgba(var(--dark-d), 0.75); */
 	}
+
 	pre {
 		position: absolute;
 		top: 10rem;

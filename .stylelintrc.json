@@ -8,7 +8,7 @@
 		"color-hex-case": "upper",
 		"color-hex-length": "long",
 		"selector-combinator-space-after": "always",
-		"selector-attribute-quotes": "never",
+		"selector-attribute-quotes": "always",
 		"selector-attribute-operator-space-before": "never",
 		"selector-attribute-operator-space-after": "never",
 		"selector-attribute-brackets-space-inside": "never",
