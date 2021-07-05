@@ -58,6 +58,8 @@
 			style="
 				background: {$settings.transparent ? 'transparent' : background};
 				color: {$settings.transparent ? 'transparent' : foreground};
+				width:{$settings.width}px;
+				height:{$settings.icon}px;
 				"
 		>
 			{#if image}
@@ -90,6 +92,7 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
+		margin: auto;
 	}
 	.icon {
 		max-width: 100%;
