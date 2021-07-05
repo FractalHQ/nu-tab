@@ -1,10 +1,13 @@
-import type { Collection } from './types'
-import getIcon from './besticon'
+import type { Collection } from '../types'
+import getIcon from '../besticon'
 import cuid from 'cuid'
 
-// TODO:
-let todo = "Generate a random svg or something"
-const defaultImage = todo
+// const defaultImage = // TODO: "Generate a random svg or something"
+
+const default_theme = {
+	background: '#1D1D1D',
+	foreground: '#F5F5F5',
+}
 
 const defaultCollection: Collection = {
     collection_id: cuid(),
@@ -18,10 +21,9 @@ const defaultCollection: Collection = {
             title: 'Devo',
             description: 'Dev News Extensions',
             image: 'https://github.com/karakanb/devo/raw/master/img/logo.png',
-            background: '#1D1D1D',
-            foreground: '#F5F5F5',
             collection_id: 'default',
-            tags: ['Dev', 'News']
+            tags: ['Dev', 'News'],
+			...default_theme
         },
         {
             bookmark_id: cuid(),
@@ -29,10 +31,9 @@ const defaultCollection: Collection = {
             title: 'OpenBase',
             description: 'Repo Search Engine',
             image: 'https://d25hn4jiqx5f7l.cloudfront.net/companies/logos/medium/openbase_1601666331.png',
-            background: '#1D1D1D',
-            foreground: '#F5F5F5',
             collection_id: 'default',
-            tags: ['Dev', 'News']
+            tags: ['Dev', 'Code', 'Search'],
+			...default_theme
         },
         {
             bookmark_id: cuid(),
@@ -40,32 +41,59 @@ const defaultCollection: Collection = {
             title: 'Reddit',
             description: 'Front Page of the Internet',
             image: 'https://www.redditinc.com/assets/images/site/reddit-logo.png',
-            background: '#1D1D1D',
-            foreground: '#F5F5F5',
             collection_id: 'default',
-            tags: ['Dev', 'News']
+            tags: ['Entertainment', 'News', 'Media'],
+			...default_theme
         },
         {
             bookmark_id: cuid(),
             url: 'https://www.youtube.com/',
             title: 'Youtube',
             description: '',
-            image: 'https://cdn.cdnlogo.com/logos/y/92/youtube.svg',
-            background: '#1D1D1D',
-            foreground: '#F5F5F5',
+            image: 'https://cdn.svgporn.com/logos/youtube-icon.svg',
             collection_id: 'default',
-            tags: ['Dev', 'News']
+            tags: ['Google', 'Video', 'Entertainment', 'Media'],
+			...default_theme
         },
+		{
+			bookmark_id: cuid(),
+			url: 'https://github.com',
+			title: 'Github',
+			description: '',
+			image: 'https://cdn.svgporn.com/logos/github-icon.svg',
+			collection_id: 'default',
+			tags: ['Dev', 'Github'],
+			...default_theme
+		},
         {
             bookmark_id: cuid(),
             url: 'https://mail.google.com/mail',
             title: 'Gmail',
             description: 'Email',
             image: 'https://cdn.svgporn.com/logos/google-gmail.svg',
-            background: '#1D1D1D',
-            foreground: '#F5F5F5',
             collection_id: 'default',
-            tags: ['Dev', 'News']
+            tags: ['Google', 'Email', 'Mail'],
+			...default_theme
+        },
+        {
+            bookmark_id: cuid(),
+            url: 'https://drive.google.com/drive/my-drive',
+            title: 'Google Drive',
+            description: '',
+			image: 'https://cdn.svgporn.com/logos/google-drive.svg',
+            collection_id: 'default',
+            tags: ['Google', 'Storage'],
+			...default_theme
+        },
+        {
+            bookmark_id: cuid(),
+            url: 'https://photos.google.com/',
+            title: 'Google Photos',
+            description: '',
+			image: 'https://cdn.svgporn.com/logos/google-photos.svg',
+            collection_id: 'default',
+            tags: ['Google', 'Storage', 'Photos', 'Images'],
+			...default_theme
         },
     ],
     position: 0,

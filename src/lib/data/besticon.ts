@@ -1,10 +1,9 @@
-import defaultCollection from './defaults'
+import defaultCollection from './collections/defaultsons/defaults'
 
 // https://besticon-demo.herokuapp.com/
 const iconFromUrl = (url: string) => `https://besticon-demo.herokuapp.com/allicons.json?url=${encodeURIComponent(url)}`;
 
 const getIcon = async (url: string) => {
-    const test_url: string = defaultCollection.bookmarks[1].url;
     try {
         fetch(iconFromUrl(url))
             .then((response => response.json()))
@@ -13,7 +12,6 @@ const getIcon = async (url: string) => {
                 return data;
             });
     } catch (e) { console.error(e); }
-    
 }
 
 export default getIcon

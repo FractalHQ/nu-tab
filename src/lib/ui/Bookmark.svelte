@@ -69,7 +69,7 @@
 				/>
 			{/if}
 			{#if (title && $settings.showTitle) || hovering == i}
-				<p transition:fade={{ duration: 150 }}>{title}</p>
+				<p transition:fade={{ duration: 100 }}>{title}</p>
 			{/if}
 		</div>
 	</a>
