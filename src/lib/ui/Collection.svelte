@@ -20,16 +20,15 @@
 	});
 
 	let editorSettings;
-	let index;
+
 	function showEditor(i) {
-		index = i;
-		editorSettings = $activeCollection.bookmarks[index];
+		editorSettings = $activeCollection.bookmarks[i];
 		showModal = true;
 	}
 </script>
 
 <Modal bind:showModal opacity={0}>
-	<BookmarkEditor {editorSettings} />
+	<BookmarkEditor bind:editorSettings />
 </Modal>
 
 <div class="collection-container">

@@ -78,8 +78,8 @@ const defaultCollection: Collection = {
         {
             bookmark_id: cuid(),
             url: 'https://drive.google.com/drive/my-drive',
-            title: 'Google Drive',
-            description: '',
+            title: 'Drive',
+            description: 'Google Drive',
 			image: 'https://cdn.svgporn.com/logos/google-drive.svg',
             collection_id: 'default',
             tags: ['Google', 'Storage'],
@@ -88,8 +88,8 @@ const defaultCollection: Collection = {
         {
             bookmark_id: cuid(),
             url: 'https://photos.google.com/',
-            title: 'Google Photos',
-            description: '',
+            title: 'Photos',
+            description: 'Gogle Photos',
 			image: 'https://cdn.svgporn.com/logos/google-photos.svg',
             collection_id: 'default',
             tags: ['Google', 'Storage', 'Photos', 'Images'],

@@ -16,17 +16,17 @@
 		showEditIcon = false,
 		expandEditIcon = false;
 
-	function smoothOver(delay, bool) {
+	function smoothOver(fn, delay = 300) {
 		timer && clearTimeout(timer);
 		timer = setTimeout(() => {
-			bool = true;
+			fn();
 		}, delay);
 	}
 
-	function smoothOut(delay, bool) {
+	function smoothOut(fn, delay = 300) {
 		timer && clearTimeout(timer);
 		timer = setTimeout(() => {
-			bool = false;
+			fn();
 		}, delay);
 	}
 
@@ -36,13 +36,13 @@
 
 <div
 	class="bookmark-container"
-	on:mouseover={() => smoothOver(500, showEditIcon)}
-	on:mouseout={() => smoothOut(300, showEditIcon)}
+	on:mouseover={() => smoothOver(() => (showEditIcon = true))}
+	on:mouseout={() => smoothOut(() => (showEditIcon = false))}
 >
 	{#if showEditIcon}
 		<div
-			on:mouseover={() => smoothOver(500, expandEditIcon)}
-			on:mouseout={() => smoothOut(300, expandEditIcon)}
+			on:mouseover={() => smoothOver(() => (expandEditIcon = true))}
+			on:mouseout={() => smoothOut(() => (expandEditIcon = false))}
 			class="edit"
 			class:expand={expandEditIcon}
 			transition:scale={{ duration: 150 }}
@@ -51,6 +51,7 @@
 			<Edit />
 		</div>
 	{/if}
+
 	<a target="_blank" href={url}>
 		<div
 			transition:scale={{ duration: 200 + 50 * i }}
@@ -80,6 +81,7 @@
 <style>
 	.bookmark-container {
 		position: relative;
+		height: 100%;
 		width: 100%;
 	}
 	.bookmark {
@@ -105,16 +107,19 @@
 	}
 
 	p {
-		font-size: 18px;
 		width: 100%;
+		font-size: 18px;
+		line-height: 150%;
 		position: absolute;
 		transform: translateY(200%);
 		color: rgb(var(--dark-d));
 		letter-spacing: 2px;
+		white-space: nowrap;
 	}
 
 	a {
-		width: 100%;
+		width: max-content;
+		height: max-content;
 		text-decoration: none;
 		color: rgb(var(--dark-a));
 		position: relative;
