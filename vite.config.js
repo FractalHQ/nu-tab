@@ -1,33 +1,65 @@
-const { svelte } = require('@sveltejs/vite-plugin-svelte');
-const { defineConfig } = require('vite');
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import autoPreprocess from 'svelte-preprocess'
+import replace from '@rollup/plugin-replace'
+import { resolve, dirname } from 'path'
+import autoprefixer from 'autoprefixer'
+import viteMainJs from 'vite-main-js'
+import { mdsvex } from 'mdsvex'
+import cssnano from 'cssnano'
 
-const replace = require('@rollup/plugin-replace');
-require('dotenv').config()
 
-module.exports = defineConfig(({ command, mode }) => {
-	const isProduction = mode === 'production';
-	return {
-		optimizeDeps: {
-			exclude: ['@roxi/routify'],
-		},
-		plugins: [
-			svelte(),
-			// @ts-expect-error
-			replace({
-				preventAssignment: true,
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.PUBLIC_SUPABASE_KEY': JSON.stringify(
-					process.env.PUBLIC_SUPABASE_KEY,
-				),
-				'process.env.PUBLIC_SUPABASE_URL': JSON.stringify(
-					process.env.PUBLIC_SUPABASE_URL,
-				),
-				'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
-			}),
-		],
-		build: {
-			minify: isProduction,
-		},
-	};
-});
+const dev = process.env.NODE_ENV === 'dev'
+
+import { fileURLToPath } from 'url';
+// @ts-ignore
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const production = process.env.NODE_ENV === 'production'
+
+export default {
+	server: {
+		port: 5000
+	},
+	build: {
+		cssCodeSplit: false
+	},
+	optimizeDeps: {
+		exclude: ['@roxi/routify']
+	},
+	resolve: {
+		dedupe: ['@roxi/routify'],
+		alias: {
+			$utils: resolve(__dirname, './src/lib/utils'),
+			$auth: resolve(__dirname, './src/lib/auth'),
+			$data: resolve(__dirname, './src/lib/data'),
+			$lib: resolve(__dirname, './src/lib'),
+			$ui: resolve(__dirname, './src/ui'),
+			$: resolve(__dirname, './src')
+		}
+	},
+	plugins: [
+		viteMainJs(),
+		svelte({
+			preprocess: [
+				// @ts-ignore
+				autoPreprocess({
+					postcss: {
+						plugins: [
+							autoprefixer,
+							// @ts-ignore
+								cssnano({
+									preset: 'default'
+								})
+						]
+					}
+				}),
+				mdsvex(),
+				
+			],
+			emitCss: true,
+			hot: !production,
+			extensions: ['.md', '.svelte']
+		})
+	]
+}

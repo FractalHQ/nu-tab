@@ -15,8 +15,8 @@ function createAuthStore() {
 	const error = writable(null);
 	const user = writable(null);
 
-	const supabaseURL = process.env.PUBLIC_SUPABASE_URL;
-	const supabasePublicKey = process.env.PUBLIC_SUPABASE_KEY;
+	const supabaseURL = import.meta.env.VITE_PUBLIC_SUPABASE_URL;
+	const supabasePublicKey = import.meta.env.VITE_PUBLIC_SUPABASE_KEY;
 	
 	const supabase = createClient(supabaseURL, supabasePublicKey);
 
