@@ -1,5 +1,5 @@
 import { activeCollection } from './dbStore';
-import defaultBookmarks from './defaults';
+import defaultCollection from './collections/defaultCollection';
 import db from './db';
 
 // https://github.com/vitejs/vite/blob/main/packages/vite/src/node/logger.ts // TODO use this to make logger a thing
@@ -41,8 +41,8 @@ const log = (opts = defaults) => {
 export async function addDefaultCollection() {
     log('🎬 Adding default Bookmark Collection: ', 'lightpurple', 25);
 
-    await db.collections.add(defaultBookmarks);
-    activeCollection.set(defaultBookmarks);
+    await db.collections.add(defaultCollection);
+    activeCollection.set(defaultCollection);
 
     log('🏁 Add Defaults Complete', 'lightpurple', 25);
 }
@@ -56,8 +56,8 @@ export async function addDefaultCollection() {
 export async function newBookmark() {
     log('🎬 Creating new bookmark: ', 'lightpurple', 25);
 
-    await db.collections.add(defaultBookmarks);
-    activeCollection.set(defaultBookmarks);
+    await db.collections.add(defaultCollection);
+    activeCollection.set(defaultCollection);
 
     log('🏁 Add Defaults Complete', 'lightpurple', 25);
 }
