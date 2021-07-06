@@ -1,9 +1,7 @@
-.vscode
-.idea
 node_modules
-dist
-dist-ssr
-.routify
-.env
-.local
 csscomb.json
+.routify
+.local
+.idea
+dist
+.env
