@@ -6,9 +6,9 @@
 	import { scale, fly, fade } from 'svelte/transition'
 	import Edit from '$lib/icons/Edit.svelte'
 
-	export let i
+	export let i: number
 	export let bookmark
-	export let hovering
+	export let hovering = []
 
 	const dispatch = createEventDispatcher()
 
@@ -120,7 +120,7 @@
 		font-size: 18px;
 		line-height: 150%;
 
-		color: rgb(var(--dark-d));
+		color: var(--dark-d);
 
 		transform: translateY(200%);
 		white-space: nowrap;
