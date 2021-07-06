@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte'
+
 	import { fly, slide } from 'svelte/transition'
 	import { showSettings } from '../settings/settingsStore'
 	import { clickOutside } from '../utils/clickOutside'
@@ -16,13 +18,27 @@
 	let showMenu = false
 	let x, y
 
-	function show(e) {
-		x = e.clientX
-		y = e.clientY
-		showMenu = true
+	const dispatch = createEventDispatcher()
+	function show(e: MouseEvent) {
+		const target = e.target as Element
+		if (target.className.includes('icon')) {
+			// TODO: Show settings pane for e.target
+			const classes = target.classList
+			let index: number
+			classes.forEach((c) => {
+				if (c.includes('icon') && c.length > 3) {
+					index = parseInt(c.split('icon')[1])
+				}
+			})
+			dispatch('showEditor', { index })
+		} else {
+			x = e.clientX
+			y = e.clientY
+			showMenu = true
+		}
 	}
 
-	function handleAction(i) {
+	function handleAction(i: number) {
 		options[i].action()
 		showMenu = false
 	}
@@ -34,9 +50,9 @@
 	<div
 		class="menu"
 		style="left:{x}px;top:{y}px"
+		use:clickOutside
 		on:click_outside={() => (showMenu = false)}
 		in:fly={{ y: 5, duration: 250 }}
-		use:clickOutside
 		out:fly={{ y: 5, duration: 150 }}
 	>
 		{#each options as { text, action }, i}

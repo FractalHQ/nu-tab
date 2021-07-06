@@ -64,7 +64,12 @@
 				"
 		>
 			{#if image}
-				<img style="width: {$settings.icon}px;" class="icon" src={image} alt={title} />
+				<img
+					style="width: {$settings.icon}px;"
+					class="icon icon{i}"
+					src={image}
+					alt={title}
+				/>
 			{/if}
 			{#if (title && $settings.showTitle) || hovering == i}
 				<p transition:fade={{ duration: 100 }}>{title}</p>

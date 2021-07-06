@@ -1,35 +1,23 @@
-<script>
-	import { addDefaultCollection } from '../data/transactions';
-	import { settings } from '../settings/settingsStore';
-	import SettingsPanel from '../settings/SettingsPanel.svelte';
-	import BookmarkEditor from './BookmarkEditor.svelte';
-	import { activeCollection } from '../data/dbStore';
-	import Bookmark from './Bookmark.svelte';
-	import Modal from './Modal.svelte';
-	import { onMount } from 'svelte';
+<script lang="ts">
+	import SettingsPanel from '../settings/SettingsPanel.svelte'
+	import { addDefaultCollection } from '../data/transactions'
+	import { settings } from '../settings/settingsStore'
+	import BookmarkEditor from './BookmarkEditor.svelte'
+	import { activeCollection } from '../data/dbStore'
+	import Bookmark from './Bookmark.svelte'
+
+	import { onMount } from 'svelte'
 
 	const updateSetting = (setting, value) => {
-		$settings.setting = value;
-	};
+		$settings.setting = value
+	}
 
-	let showModal = false;
-	let hovering = null;
+	let hovering = null
 
 	onMount(() => {
-		addDefaultCollection();
-	});
-
-	let editorSettings;
-
-	function showEditor(i) {
-		editorSettings = $activeCollection.bookmarks[i];
-		showModal = true;
-	}
+		addDefaultCollection()
+	})
 </script>
-
-<Modal bind:showModal opacity={0}>
-	<BookmarkEditor bind:editorSettings />
-</Modal>
 
 <div class="collection-container">
 	{#if $activeCollection.bookmarks}
@@ -45,7 +33,7 @@
                 on:mouseover={() => hovering = i}
                 on:mouseout={() => hovering = null}
 			>
-				<Bookmark {bookmark} {hovering} {i} on:showEditor={(e) => showEditor(e.detail.index)}/>
+				<Bookmark {bookmark} {hovering} {i} on:showEditor/>
 			</div>
 		{/each}
 	{/if}
