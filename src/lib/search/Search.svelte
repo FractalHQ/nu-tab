@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { defaultEngines } from './Engines.svelte'
 	import { activeEngine } from './searchStore'
-	import '$utils/rotateArray'
 	import Icons from './IconList.svelte'
 	import { onMount } from 'svelte'
+	import '$utils/rotateArray'
 
-	let input
+	let input: Element
 	let engines = Array.from(defaultEngines)
 	let startPosition = $activeEngine
 

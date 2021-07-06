@@ -1,30 +1,30 @@
 <script>
-	import { fly, slide } from 'svelte/transition';
-	import { showSettings } from '../settings/settingsStore';
-	import { clickOutside } from '../utils/clickOutside';
+	import { fly, slide } from 'svelte/transition'
+	import { showSettings } from '../settings/settingsStore'
+	import { clickOutside } from '../utils/clickOutside'
 
 	export let options = [
 		{
 			text: 'New Bookmark',
-			action: () => alert('Good Job'),
+			action: () => alert('Good Job')
 		},
 		{
 			text: 'Settings',
-			action: () => ($showSettings = true),
-		},
-	];
-	let showMenu = false;
-	let x, y;
+			action: () => ($showSettings = true)
+		}
+	]
+	let showMenu = false
+	let x, y
 
 	function show(e) {
-		x = e.clientX;
-		y = e.clientY;
-		showMenu = true;
+		x = e.clientX
+		y = e.clientY
+		showMenu = true
 	}
 
 	function handleAction(i) {
-		options[i].action();
-		showMenu = false;
+		options[i].action()
+		showMenu = false
 	}
 </script>
 
@@ -49,7 +49,7 @@
 
 <style>
 	.menu {
-		background: #fff;
+		background: var(--light-a);
 		box-shadow: 1px 2px 5px #0002;
 		border-radius: 0.5em;
 		overflow: hidden;
@@ -69,6 +69,6 @@
 		transition: background 0.2s;
 	}
 	.option:hover {
-		background: #eee;
+		background: var(--light-b);
 	}
 </style>
