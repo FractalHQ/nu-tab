@@ -8,7 +8,7 @@
 
 	export let i: number
 	export let bookmark
-	export let hovering = []
+	export let hovering: number
 
 	const dispatch = createEventDispatcher()
 
@@ -16,7 +16,7 @@
 		showEditIcon = false,
 		expandEditIcon = false
 
-	function smoothOver(fn, delay = 300) {
+	function smoothOver(fn, delay = 500) {
 		timer && clearTimeout(timer)
 		timer = setTimeout(() => {
 			fn()
