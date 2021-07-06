@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { fly } from 'svelte/transition'
-	export let engines = []
+	export let engines = [],
+		searchFocused = true
 
 	let hovering = Array.from(engines).fill(false),
 		disableShowAll = false,
@@ -9,7 +10,7 @@
 		showAll = false,
 		timer = null
 
-	const isActiveEngine = (i: number) => i === 0
+	$: hovering
 
 	const mouseover = (i: number) => {
 		if (disableShowAll) return
@@ -24,7 +25,7 @@
 	const mouseout = (i: number) => {
 		timer && clearTimeout(timer)
 		timer = setTimeout(() => {
-			hovering.fill(false)
+			hovering[i] = false
 			hoverTarget = 0
 			showAll = false
 		}, 400)
@@ -42,6 +43,8 @@
 			disableShowAll = false
 		}, 250)
 	}
+
+	const isActiveEngine = (i: number) => i === 0
 </script>
 
 <div class="engines">
@@ -49,13 +52,13 @@
 		{#if isActiveEngine(i) || showAll}
 			<div
 				class="icon"
-				class:hovering={hovering[i]}
+				class:hovering={hovering[i] || searchFocused}
 				style="transform: translateX(-{i * 50}px);"
+				in:fly={{ x: 10 * i }}
 				out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
-				on:click={() => handleClick(position)}
 				on:mouseover={() => mouseover(i)}
 				on:mouseout={() => mouseout(i)}
-				in:fly={{ x: 10 * i }}
+				on:click={() => handleClick(position)}
 			>
 				<svelte:component this={icon} />
 			</div>
@@ -67,15 +70,15 @@
 			in:fly={{ delay: 50, y: 4 }}
 			out:fly={{ duration: 150, y: -4 }}
 			class="tooltipText"
-			class:hovering={hovering[hoverTarget]}
+			class:bright={hovering[hoverTarget]}
 		>
-			{engines[hoverTarget].name}
+			{engines[hoverTarget]?.name}
 		</div>
 	{/key}
 </div>
 
 <style>
-	.tooltipText.hovering {
+	.tooltipText.bright {
 		transition-delay: opacity 1.5s, transform 0.2s;
 
 		opacity: 1;

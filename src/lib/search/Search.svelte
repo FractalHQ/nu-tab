@@ -84,18 +84,21 @@
 	}
 
 	const debug = false
+	let searchFocused = true
 </script>
 
 <div class="search-wrapper">
-	<Icons bind:engines on:newSelection={(e) => select(e.detail.position)} />
+	<Icons bind:engines on:newSelection={(e) => select(e.detail.position)} {searchFocused} />
 
 	<input
 		type="text"
 		id="search"
 		autocomplete="off"
+		bind:this={input}
 		bind:value={inputValue}
 		on:keydown={(e) => hotkey(e.key)}
-		bind:this={input}
+		on:focus={() => (searchFocused = true)}
+		on:blur={() => (searchFocused = false)}
 	/>
 </div>
 
@@ -136,7 +139,7 @@
 	}
 
 	:global(#search:focus .icon) {
-		opacity: 1;
+		opacity: 1 !important;
 	}
 
 	.search-wrapper {
