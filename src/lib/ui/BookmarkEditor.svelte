@@ -145,9 +145,9 @@
 	}
 
 	.tags {
-		font-family: var(--font-primary);
 		height: max-content;
 		min-height: 5rem;
+		font-family: var(--font-primary);
 		transform: translateY(39%);
 	}
 

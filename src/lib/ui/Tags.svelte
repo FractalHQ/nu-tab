@@ -388,7 +388,7 @@
 	.input-layout {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
+		/* align-items: center; */
 
 		max-width: 100%;
 		margin-left: -3px;
@@ -433,7 +433,6 @@
 
 	.input.new-tag {
 		margin-left: 0;
-		height: 80%;
 	}
 
 	/* input-tag */
