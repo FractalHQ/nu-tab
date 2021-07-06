@@ -37,7 +37,7 @@
 		<div id="title" contenteditable bind:innerHTML={editorSettings['title']} />
 	</div>
 
-	<div class="setting">
+	<div class="setting description">
 		<!-- <label for='description'>description</label> -->
 		<input
 			name="description"
@@ -145,10 +145,9 @@
 	}
 
 	.tags {
-		height: max-content;
-		min-height: 5rem;
+		height: 100%;
+
 		font-family: var(--font-primary);
-		transform: translateY(39%);
 	}
 
 	.buttons {
@@ -162,7 +161,8 @@
 
 	label {
 		width: 10%;
-		margin: auto 0 auto auto;
+		margin: 0 0 1rem auto;
+		padding-top: 0.25rem;
 
 		color: rgba(var(--dark-d), 0.5);
 
@@ -174,12 +174,15 @@
 	}
 
 	input[name='url'] {
+		margin-bottom: 1.1rem;
+
 		font: 0.8rem monospace;
+
 		color: var(--light-c);
 	}
 
 	input[name='description'] {
-		margin: 0 auto 1rem auto;
+		margin: 0 auto 2rem auto;
 
 		color: rgba(var(--dark-d), 0.75);
 
@@ -217,7 +220,7 @@
 
 	.setting.title {
 		width: max-content;
-		margin: auto;
+		margin: 0 auto auto auto;
 	}
 
 	#title {
@@ -235,6 +238,7 @@
 
 		border: 1px solid rgba(var(--dark-d-rgb), 0);
 		border-radius: 5px;
+
 		content: '';
 
 		transition: border-color 0.2s;

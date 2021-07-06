@@ -136,7 +136,7 @@ module.exports = {
 				]
 			},
 			{
-				// "emptyLineBefore": "always",
+				"emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"table-layout",
@@ -151,7 +151,7 @@ module.exports = {
 				]
 			},
 			{
-				// "emptyLineBefore": "always",
+				"emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"font",
@@ -171,7 +171,7 @@ module.exports = {
 				]
 			},
 			{
-				// "emptyLineBefore": "always",
+				"emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"opacity",
@@ -272,7 +272,7 @@ module.exports = {
 				]
 			},
 			{
-				// "emptyLineBefore": "always",
+				"emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"overflow",

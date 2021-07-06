@@ -370,38 +370,41 @@
 <style>
 	span.hashtag {
 		padding: 0 2px;
+
 		font-size: 14px;
+
 		color: var(--light-b);
 	}
 
 	.input,
 	.input-tag,
 	.input-matchs {
+		height: max-content;
+		margin-right: 0.5rem;
+
+		margin-bottom: 1rem;
+
+		/* align-items: center; */
+
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
 			'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 		font-size: 14px;
+
 		background: none;
 	}
-
-	/* input-layout */
 
 	.input-layout {
 		display: flex;
 		flex-wrap: wrap;
+
 		/* align-items: center; */
 
 		max-width: 100%;
 		margin-left: -3px;
+
 		border: solid 1px rgb(var(--light-b-rgb), 0);
 		border-radius: 2px;
 	}
-
-	.input-layout:focus .input,
-	.input-layout:hover .input {
-		border: solid 1px rgba(var(--light-b-rgb), 1);
-	}
-
-	/* input */
 
 	.input {
 		flex: 1;
@@ -409,12 +412,15 @@
 		margin: auto;
 		margin-left: 15px;
 		margin-right: 5px;
-		padding: 5px;
+
+		/* padding: 5px; */
 
 		font-family: inherit;
+
 		color: rgb(var(--light-c));
 		border: solid 1px rgba(var(--light-b-rgb), 0);
 		border-radius: 4px;
+
 		transition: all 0.3s;
 		box-flex: 1;
 	}
@@ -426,43 +432,47 @@
 	input::-webkit-input-placeholder {
 		color: transparent;
 	}
+
 	.input-layout:hover .input::-webkit-input-placeholder {
 		color: var(--light-c);
-		transform: translate(2px, -1px);
+
+		transform: translate(0px, -1px);
 	}
 
 	.input.new-tag {
+		height: 15px;
 		margin-left: 0;
+
+		transform: translateY(-2px);
 	}
 
-	/* input-tag */
-
 	.input-tag {
-		display: box;
-		display: flexbox;
 		display: flex;
 
 		list-style: none;
+
 		color: var(--light-d);
 		border-radius: 2px;
 
-		/* margin-top: 5px; */
 		cursor: default;
 		white-space: nowrap;
 	}
 
 	.input-tag-remove {
 		padding-left: 3px;
+
 		color: rgba(var(--light-c-rgb), 0);
+
 		cursor: pointer;
 		transition: 0.2s;
 		animation-name: spin;
 		animation-duration: 3s;
 		animation-timing-function: ease-out;
 	}
+
 	.input-layout:focus .input-tag-remove,
 	.input-layout:hover .input-tag-remove {
-		color: rgba(var(--light-c-rgb), 1);
+		color: rgba(var(--light-c-rgb), 0.5);
 	}
 
 	@keyframes spin {
@@ -476,6 +486,7 @@
 
 	.input-tag-remove:hover {
 		font-weight: 700;
+
 		color: rgba(var(--dark-c-rgb), 1) !important;
 	}
 
@@ -498,14 +509,17 @@
 		/* background:#FFF; */
 		border: solid 1px var(--light-c);
 		border-radius: 2px;
+
 		overflow: scroll;
 		overflow-x: auto;
 	}
 
 	.input-matchs li {
-		padding: 5px;
+		/* padding: 5px; */
 		list-style: none;
+
 		border-radius: 2px;
+
 		cursor: pointer;
 	}
 
@@ -520,6 +534,7 @@
 	.input-layout.sti-layout-disable,
 	.input:disabled {
 		background: var(--light-b);
+
 		cursor: not-allowed;
 	}
 
