@@ -1,96 +1,64 @@
-<script>
-	import { createEventDispatcher } from 'svelte';
-	import { fly } from 'svelte/transition';
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte'
+	import { activeEngine } from './searchStore'
+	import { fly } from 'svelte/transition'
 
-	const dispatch = createEventDispatcher();
-	export let engines = [];
+	const dispatch = createEventDispatcher()
+	export let engines = []
 
-	let hovering = false,
-		timer = null;
-
-	const smoothHover = {
-		over: (delay = 0) => {
-			timer && clearTimeout(timer);
-			if (hovering) return;
-
-			timer = setTimeout(() => {
-				hovering = true;
-			}, delay);
-		},
-
-		out: (delay = 400) => {
-			timer && clearTimeout(timer);
-			if (!hovering) return;
-
-			timer = setTimeout(() => {
-				hovering = false;
-			}, delay);
-		},
-	};
-
-	let newSelectionEvent = false,
-		readyToReset = false;
-
-	function handleSelection(index) {
-		timer && clearTimeout(timer);
-
-		newSelectionEvent = true;
-
-		dispatch('newSelection', { index });
-
+	let hoverTarget = 0
+	let hovering = Array.from(engines).fill(false)
+	let newSelectionEvent = false
+	let activeIndex = 0
+	let showAll = false
+	let timer = null
+	$: tooltipText = ''
+	const mouseover = (i: number) => {
+		timer && clearTimeout(timer)
+		showAll = true
+		tooltipText = engines[i].name
+		hoverTarget = i
+	}
+	const mouseout = (i: number) => {
+		timer && clearTimeout(timer)
+		tooltipText = ''
 		timer = setTimeout(() => {
-			readyToReset = true;
-		}, 300);
+			showAll = false
+		}, 400)
 	}
 
-	function resetSelectionEvent() {
-		if (readyToReset) {
-			timer && clearTimeout(timer);
-			newSelectionEvent = false;
-			readyToReset = false;
-		}
-	}
-
-	let tooltipText = '';
-	let activeIndex = 0;
-	function handleMouseOver(i) {
-		resetSelectionEvent();
-		hovering = true;
-		tooltipText = engines[i].name;
-		activeIndex = i;
-	}
+	const isActiveEngine = (i: number) => i === 0
 </script>
 
-<div
-	class="engines"
-	on:mouseover={() => smoothHover.over(400)}
-	on:mouseout={() => smoothHover.out(400)}
->
-	{#each engines as { position, icon, name }, i}
-		{#if i === 0 || hovering}
+<div class="engines">
+	{#each engines as { position, icon }, i}
+		{#if isActiveEngine(i) || showAll}
 			{#if i === 0 || !newSelectionEvent}
 				<div
+					on:mouseover={() => (hovering[i] = true)}
+					on:mouseout={() => (hovering[i] = false)}
 					class="icon"
-					class:hovering
+					class:hovering={hovering[i]}
 					in:fly={{ x: 10 * i }}
 					out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
-					on:click={() => handleSelection(position)}
 					style="transform: translateX(-{i * 50}px);"
-					on:mouseover={() => handleMouseOver(i)}
+					on:click={() => dispatch('newSelection', { position: position })}
+					on:mouseover={() => mouseover(i)}
+					on:mouseout={() => mouseout(i)}
 				>
 					<svelte:component this={icon} />
 				</div>
 			{/if}
 		{/if}
 	{/each}
-	{#key activeIndex}
+	{#key hoverTarget}
 		<div
 			in:fly={{ delay: 50, y: 4 }}
 			out:fly={{ duration: 150, y: -4 }}
 			class="tooltipText"
-			class:hovering
+			class:hovering={hovering[hoverTarget]}
 		>
-			{tooltipText}
+			{engines[hoverTarget].name}
 		</div>
 	{/key}
 </div>
@@ -106,9 +74,9 @@
 
 		position: absolute;
 
+		transform: translate(7px, 50px);
 		transition: 0.2s ease-out;
 		transition-delay: opacity 0.5s, transform 0.2s;
-		transform: translate(1em, 50px);
 		text-align: center;
 		white-space: nowrap;
 		letter-spacing: 0.3em;

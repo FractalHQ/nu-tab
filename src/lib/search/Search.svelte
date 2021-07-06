@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { defaultEngines } from './Engines.svelte'
 	import { activeEngine } from './searchStore'
-	import rotate from '$utils/rotateArray'
+	import '$utils/rotateArray'
 	import Icons from './IconList.svelte'
 	import { onMount } from 'svelte'
 
@@ -61,7 +61,7 @@
 	}
 
 	// Icon Position
-	function select(position) {
+	const select = (position: number) => {
 		if (position < 0) {
 			position = engines.length - 1
 		} else if (position > engines.length - 1) {
@@ -70,12 +70,15 @@
 		const distance = Math.abs(engines.length - $activeEngine + position)
 		$activeEngine = position
 		engines = engines.rotate(distance)
+		console.log('activeEngine = ', $activeEngine)
+		console.log('engines = ', engines)
 		input.focus()
 	}
 
+	let targetPosition = engines.find((engine) => engine.position == startPosition).position
 	// Rotate array based on users default setting.
-	function rotateEngines(target = $activeEngine) {
-		const targetPosition = engines.find((engine) => engine.position == target).position
+	const rotateEngines = (target = $activeEngine) => {
+		targetPosition = engines.find((engine) => engine.position == target).position
 		engines = engines.rotate(targetPosition)
 		input.focus()
 	}
@@ -83,15 +86,8 @@
 	const debug = false
 </script>
 
-{#if debug}
-	$activeEngine: {$activeEngine}
-	<br />
-	targetPosition: {startPosition}
-	<br />
-{/if}
-
 <div class="search-wrapper">
-	<Icons bind:engines on:newSelection={(e) => select(e.detail.index)} />
+	<Icons bind:engines on:newSelection={(e) => select(e.detail.position)} />
 
 	<input
 		type="text"
@@ -102,6 +98,18 @@
 		bind:this={input}
 	/>
 </div>
+
+{#if debug}
+	<div class="debug" style="margin: auto; width: max-content; font-size: 1.5rem;">
+		$activeEngine: {$activeEngine}
+		<br />
+		targetPosition: {targetPosition}
+		<br />
+		startPosition: {startPosition}
+		<br />
+	</div>
+	<pre>{JSON.stringify(engines, null, 4).split('"').join('')}</pre>
+{/if}
 
 <style>
 	#search {

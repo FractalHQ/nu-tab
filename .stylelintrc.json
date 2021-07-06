@@ -34,7 +34,13 @@
 		"declaration-empty-line-before": null,
 		"order/properties-order": [
 			{
-				"emptyLineBefore": "always",
+				"emptyLineBefore": [
+					"always",
+					{
+					  "except": ["after-declaration"],
+					  "ignore": ["inside-single-line-block"]
+					}
+				  ],
 				"order": "flexible",
 				"properties": [
 					"display",
