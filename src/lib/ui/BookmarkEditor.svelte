@@ -87,8 +87,8 @@
 	</div>
 
 	<div class="buttons">
-		<Button borderHover="1px solid var(--brand-a)">Cancel</Button>
-		<Button>Save</Button>
+		<Button --colorHover="var(--warn)" --borderHover="1px solid var(--warn)">Cancel</Button>
+		<Button --colorHover="var(--confirm)" --borderHover="1px solid var(--confirm)">Save</Button>
 	</div>
 
 	{#if editorSettings['image'] === null}
@@ -151,9 +151,11 @@
 	}
 
 	.buttons {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 
-		width: max-content;
+		height: 4rem;
+		width: 10rem;
 		margin: 1rem auto;
 
 		gap: 1rem;

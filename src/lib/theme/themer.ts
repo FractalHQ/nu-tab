@@ -36,6 +36,10 @@ const mapTheme = (theme = themes['light']) => {
 		'--dark-d-rgb': theme.darkDRGB || '',
 		'--always-dark': theme.alwaysDark || '',
 		'--invert': theme.invert || '',
+		'--warn': theme.warn || '',
+		'--warn-rgb': theme.warnRGB || '',
+		'--confirm': theme.confirm || '',
+		'--confirm-rgb': theme.confirmRGB || '',
 	};
 };
 

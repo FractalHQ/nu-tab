@@ -13,6 +13,10 @@ const brand = {
 	brandC: '#577590',
 	brandCRGB: '87,117,144',
 	alwaysDark: '#111111',
+	warn: '#d81e5b',
+	warnRGB: '216, 30, 91',
+	confirm: '#33B3E9',
+	confirmRGB: '51, 179, 233'
 };
 
 export const light = {
