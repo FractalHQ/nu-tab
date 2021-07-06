@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"extends": "stylelint-config-idiomatic-order",
 	"plugins": ["stylelint-order"],
 	"rules": {
@@ -34,13 +34,14 @@
 		"declaration-empty-line-before": null,
 		"order/properties-order": [
 			{
-				"emptyLineBefore": [
-					"always",
-					{
-					  "except": ["after-declaration"],
-					  "ignore": ["inside-single-line-block"]
-					}
-				  ],
+				"emptyLineBefore": "always",
+				// [
+				// 		"always",
+				// 	{
+				// 	  "except": ["after-declaration"],
+				// 	  "ignore": ["inside-single-line-block"]
+				// 	}
+				// ],
 				"order": "flexible",
 				"properties": [
 					"display",
@@ -135,7 +136,7 @@
 				]
 			},
 			{
-				"emptyLineBefore": "always",
+				// "emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"table-layout",
@@ -150,7 +151,7 @@
 				]
 			},
 			{
-				"emptyLineBefore": "always",
+				// "emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"font",
@@ -170,7 +171,7 @@
 				]
 			},
 			{
-				"emptyLineBefore": "always",
+				// "emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"opacity",
@@ -271,7 +272,7 @@
 				]
 			},
 			{
-				"emptyLineBefore": "always",
+				// "emptyLineBefore": "always",
 				"order": "flexible",
 				"properties": [
 					"overflow",

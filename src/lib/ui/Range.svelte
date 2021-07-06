@@ -36,9 +36,9 @@
 		height: 12px;
 		margin-top: 0px;
 
-		border: 1px solid #000000;
+		border: 1px solid var(--light-a);
 		border-radius: 20px;
-		background: var(--light-a);
+		background: var(--dark-d);
 		background-image: radial-gradient(ellipse at var(--progress) var(--progress), blue, red);
 
 		cursor: pointer;

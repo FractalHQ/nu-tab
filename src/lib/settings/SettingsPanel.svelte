@@ -16,8 +16,8 @@
 	<div
 		class="control-panel"
 		transition:fly={{ y: 500, opacity: 1 }}
-		use:clickOutside
 		on:click_outside={() => ($showSettings = false)}
+		use:clickOutside
 	>
 		<div class="controls">
 			{#each Object.keys(ranges) as setting}

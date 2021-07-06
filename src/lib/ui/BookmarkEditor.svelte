@@ -1,10 +1,21 @@
 <script>
-	import Button from './Button.svelte'
+	import Button from '$ui/Button.svelte'
+	import Tags from '$ui/Tags.svelte'
 
 	export let editorSettings = {}
+	export let settings, i, bookmark_id
 	let descriptionHover = false
 	$: placeholder = descriptionHover ? 'description' : '+'
 	let debug = false
+
+	let hovering
+	let tag = ''
+	function handleTags(event) {
+		tag = event.detail.tags
+	}
+	async function updateTags(event, index, id) {
+		settings['tags'] = event.detail.tags
+	}
 </script>
 
 {#if debug}
@@ -37,7 +48,25 @@
 
 	<div class="setting">
 		<label for="tags">tags</label>
-		<input name="tags" type="text" bind:value={editorSettings['tags']} />
+		<!-- <input name="tags" type="text" bind:value={editorSettings['tags']} /> -->
+		<div name="tags" class="tags">
+			<Tags
+				on:updateTags={(e) => updateTags(e, i, bookmark_id)}
+				on:tags={handleTags}
+				placeholder={'+'}
+				allowPaste={true}
+				onlyUnique={true}
+				removeKeys={[46]}
+				allowDrop={true}
+				allowBlur={true}
+				splitWith={'/'}
+				addKeys={[9, 13]}
+				name={'tags'}
+				maxTags={5}
+				minChars={2}
+				bind:tags={editorSettings['tags']}
+			/>
+		</div>
 	</div>
 
 	<div class="buttons">
@@ -81,6 +110,10 @@
 		font-size: 1.3rem;
 	}
 
+	.tags {
+		font-family: var(--font-primary);
+	}
+
 	.buttons {
 		display: flex;
 
@@ -99,10 +132,11 @@
 		text-align: right;
 	}
 
-	input {
+	input,
+	.tags {
 		width: 70%;
 		margin: 0.5rem 1rem;
-		padding: 7px 8px 5px 8px;
+		padding: 0 8px 0 8px;
 
 		font-family: 'Abel';
 		font-size: 1rem;

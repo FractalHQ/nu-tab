@@ -15,6 +15,7 @@
 			action: () => ($showSettings = true)
 		}
 	]
+
 	let showMenu = false
 	let x: number, y: number
 
@@ -49,7 +50,7 @@
 {#if showMenu}
 	<div
 		class="menu"
-		style="left:{x}px;top:{y}px"
+		style="left: {x}px;top: {y}px;"
 		use:clickOutside
 		on:click_outside={() => (showMenu = false)}
 		in:fly={{ y: 5, duration: 250 }}
@@ -65,22 +66,24 @@
 
 <style>
 	.menu {
-		background: var(--light-a);
-		box-shadow: 1px 2px 5px #0002;
-		border-radius: 0.5em;
-		overflow: hidden;
-
 		position: absolute;
-
-		margin: auto;
 		width: max-content;
 		height: max-content;
+
+		margin: auto;
+
+		border-radius: 0.5em;
+		background: var(--light-a);
+		box-shadow: 1px 2px 5px #00000022;
+
+		overflow: hidden;
 	}
 	.option {
 		padding: 0.5em 1.5em;
-		cursor: pointer;
 
-		border-bottom: 1px solid #0001;
+		border-bottom: 1px solid #00000011;
+
+		cursor: pointer;
 
 		transition: background 0.2s;
 	}

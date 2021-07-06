@@ -32,14 +32,12 @@
 		select(engines.find((engine) => engine.alias == inputValue).position)
 	}
 	function deselectAlias() {
-		console.log('Rotating to OG position: ', startPosition)
 		select(startPosition)
 	}
 
 	$: if (!aliases.includes(inputValue)) {
 		if (input && inputValue == '') deselectAlias()
 	} else {
-		console.log(`input found:  ${inputValue}`)
 		selectAlias()
 	}
 
@@ -70,8 +68,6 @@
 		const distance = Math.abs(engines.length - $activeEngine + position)
 		$activeEngine = position
 		engines = engines.rotate(distance)
-		console.log('activeEngine = ', $activeEngine)
-		console.log('engines = ', engines)
 		input.focus()
 	}
 
@@ -118,7 +114,7 @@
 	#search {
 		width: 400px;
 		margin: 2rem auto;
-		padding: 0.75rem 25px 0.7rem 3.5rem;
+		padding: 0.75rem 25px 0.7rem 3rem;
 
 		line-height: 100%;
 

@@ -27,7 +27,7 @@ export const light = {
 	darkD: '#464E5C',
 	lightARGB: '245,245,245',
 	lightBRGB: '215,220,224',
-	lightCRGB: '125,138,162)',
+	lightCRGB: '125,138,162',
 	lightDRGB: '103,113,130',
 	darkARGB: '22,27,33',
 	darkBRGB: '31,38,45',

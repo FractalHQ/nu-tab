@@ -2,9 +2,9 @@
 	// import type { Bookmark } from '../data/types';
 	import { createEventDispatcher } from 'svelte'
 
-	import { settings } from '../settings/settingsStore'
+	import { settings } from '$lib/settings/settingsStore'
 	import { scale, fly, fade } from 'svelte/transition'
-	import Edit from '../icons/Edit.svelte'
+	import Edit from '$lib/icons/Edit.svelte'
 
 	export let i
 	export let bookmark
@@ -45,7 +45,7 @@
 			class="edit"
 			class:expand={expandEditIcon}
 			transition:scale={{ duration: 150 }}
-			on:click|preventDefault={() => dispatch('showEditor', { index: i })}
+			on:click|preventDefault={() => dispatch('showEditor', { bookmark, index: i })}
 		>
 			<Edit />
 		</div>
