@@ -1,56 +1,67 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
-	import { activeEngine } from './searchStore'
 	import { fly } from 'svelte/transition'
-
-	const dispatch = createEventDispatcher()
 	export let engines = []
 
-	let hoverTarget = 0
-	let hovering = Array.from(engines).fill(false)
-	let newSelectionEvent = false
-	let activeIndex = 0
-	let showAll = false
-	let timer = null
-	$: tooltipText = ''
+	let hovering = Array.from(engines).fill(false),
+		disableShowAll = false,
+		hoverTarget = 0,
+		showAll = false,
+		timer = null
+
+	const isActiveEngine = (i: number) => i === 0
+
 	const mouseover = (i: number) => {
+		if (disableShowAll) return
 		timer && clearTimeout(timer)
-		showAll = true
-		tooltipText = engines[i].name
+
+		hovering.fill(false)
+		hovering[i] = true
 		hoverTarget = i
+		showAll = true
 	}
+
 	const mouseout = (i: number) => {
 		timer && clearTimeout(timer)
-		tooltipText = ''
 		timer = setTimeout(() => {
+			hovering.fill(false)
+			hoverTarget = 0
 			showAll = false
 		}, 400)
 	}
 
-	const isActiveEngine = (i: number) => i === 0
+	const dispatch = createEventDispatcher()
+	const handleClick = (i: number) => {
+		dispatch('newSelection', { position: i })
+
+		disableShowAll = true
+		showAll = false
+		hoverTarget = 0
+
+		setTimeout(() => {
+			disableShowAll = false
+		}, 250)
+	}
 </script>
 
 <div class="engines">
 	{#each engines as { position, icon }, i}
 		{#if isActiveEngine(i) || showAll}
-			{#if i === 0 || !newSelectionEvent}
-				<div
-					on:mouseover={() => (hovering[i] = true)}
-					on:mouseout={() => (hovering[i] = false)}
-					class="icon"
-					class:hovering={hovering[i]}
-					in:fly={{ x: 10 * i }}
-					out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
-					style="transform: translateX(-{i * 50}px);"
-					on:click={() => dispatch('newSelection', { position: position })}
-					on:mouseover={() => mouseover(i)}
-					on:mouseout={() => mouseout(i)}
-				>
-					<svelte:component this={icon} />
-				</div>
-			{/if}
+			<div
+				class="icon"
+				class:hovering={hovering[i]}
+				style="transform: translateX(-{i * 50}px);"
+				out:fly={{ x: 10 * i, duration: 300 - 50 * i }}
+				on:click={() => handleClick(position)}
+				on:mouseover={() => mouseover(i)}
+				on:mouseout={() => mouseout(i)}
+				in:fly={{ x: 10 * i }}
+			>
+				<svelte:component this={icon} />
+			</div>
 		{/if}
 	{/each}
+
 	{#key hoverTarget}
 		<div
 			in:fly={{ delay: 50, y: 4 }}
