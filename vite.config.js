@@ -30,11 +30,12 @@ export default {
 	resolve: {
 		dedupe: ['@roxi/routify'],
 		alias: {
+			$actions: resolve(__dirname, './src/lib/actions'),
 			$utils: resolve(__dirname, './src/lib/utils'),
-			$auth: resolve(__dirname, './src/lib/auth'),
 			$data: resolve(__dirname, './src/lib/data'),
+			$auth: resolve(__dirname, './src/lib/auth'),
+			$ui: resolve(__dirname, './src/lib/ui'),
 			$lib: resolve(__dirname, './src/lib'),
-			$ui: resolve(__dirname, './src/ui'),
 			$: resolve(__dirname, './src')
 		}
 	},

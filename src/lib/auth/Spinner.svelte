@@ -1,15 +1,21 @@
 <script>
-	export let color = 'rgb(var(--light-c))';
-	export let thickness = 2;
-	export let speed = 750;
-	export let radius = 10;
-	export let size = 35;
-	export let gap = 40;
-	let dash;
-	$: dash = (2 * Math.PI * radius * (100 - gap)) / 100;
+	export let color = 'var(--light-c)'
+	export let thickness = 2
+	export let speed = 750
+	export let radius = 10
+	export let size = 35
+	export let gap = 40
+	let dash
+	$: dash = (2 * Math.PI * radius * (100 - gap)) / 100
 </script>
 
-<svg height={size} width={size} style="animation-duration:{speed}ms;" class="svelte-spinner" viewBox="0 0 32 32">
+<svg
+	height={size}
+	width={size}
+	style="animation-duration:{speed}ms;"
+	class="svelte-spinner"
+	viewBox="0 0 32 32"
+>
 	<circle
 		role="presentation"
 		cx="16"

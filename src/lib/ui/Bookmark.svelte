@@ -128,7 +128,7 @@
 		width: max-content;
 		height: max-content;
 
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 
 		text-decoration: none;
 	}

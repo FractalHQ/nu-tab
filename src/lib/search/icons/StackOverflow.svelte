@@ -1,5 +1,5 @@
 <svg
-	style="margin:auto;transf"
+	style="margin: auto;"
 	width="80%"
 	height="80%"
 	viewBox="-30 0 256 262"

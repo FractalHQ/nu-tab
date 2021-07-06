@@ -16,10 +16,11 @@
 		"checkJs": true,
 		"types": ["node"],
 		"paths": {
-			"$components/*": ["src/components/*"],
-			"$actions/*": ["src/actions/*"],
-			"$utils/*": ["src/utils/*"],
-			"$data/*": ["src/data/*"],
+			"$actions/*": ["src/lib/actions/*"],
+			"$utils/*": ["src/lib/utils/*"],
+			"$data/*": ["src/lib/data/*"],
+			"$auth/*": ["src/lib/auth/*"],
+			"$ui/*": ["src/lib/ui/*"],
 			"$lib/*": ["src/lib/*"],
 			"$/*": ["src/*"]
 		}

@@ -1,25 +1,30 @@
 <script>
-	import { writable } from 'svelte/store';
-	import { getTheme, toggleTheme } from './themer';
-	import { activeTheme } from './themeStore';
-	import Clouds from './graphics/Clouds.svelte';
-	import { onMount } from 'svelte';
-	import Moon from './graphics/Moon.svelte';
-	import Sun from './graphics/Sun.svelte';
-	import Stars from './graphics/Stars.svelte';
-	import { quartOut } from 'svelte/easing';
-	import { fade, fly } from 'svelte/transition';
-	const count = writable(0);
-	let mounted = false;
-	onMount(() => {
-		getTheme();
-		mounted = true;
-	});
+	import { initTheme, toggleTheme } from './themer'
+	import { activeTheme } from './themeStore'
 
-	export let size;
+	import { fade, fly } from 'svelte/transition'
+	import { quartOut } from 'svelte/easing'
+	import { writable } from 'svelte/store'
+	import { onMount } from 'svelte'
+
+	import Clouds from './graphics/Clouds.svelte'
+	import Stars from './graphics/Stars.svelte'
+	import Moon from './graphics/Moon.svelte'
+	import Sun from './graphics/Sun.svelte'
+
+	const count = writable(0)
+
+	let mounted = false
+
+	onMount(() => {
+		initTheme()
+		mounted = true
+	})
+
+	export let size
 	function handleToggle() {
-		$count++;
-		toggleTheme();
+		$count++
+		toggleTheme()
 	}
 </script>
 
@@ -32,7 +37,7 @@
 					y: $count === 0 ? -40 : 1,
 					duration: $count === 0 ? 2000 : 750,
 					opacity: $count === 0 ? 1 : 0,
-					easing: quartOut,
+					easing: quartOut
 				}}
 			>
 				<Sun {size} />
@@ -47,7 +52,7 @@
 					y: $count === 0 ? -40 : 1,
 					duration: $count === 0 ? 2000 : 750,
 					opacity: $count === 0 ? 1 : 0,
-					easing: quartOut,
+					easing: quartOut
 				}}
 			>
 				<Moon {size} />
@@ -59,8 +64,10 @@
 <style>
 	.theme-toggle {
 		position: absolute;
-		cursor: pointer;
+
 		/* left: 7px; */
 		top: 0px;
+
+		cursor: pointer;
 	}
 </style>

@@ -6,28 +6,21 @@
 	width="65%"
 	height="65%"
 	viewBox="0 0 13.1 15"
-	style="enable-background:new 0 0 13.1 15;margin:auto"
+	style="
+		enable-background: new 0 0 13.1 15;
+
+		margin: auto;
+	"
 	xml:space="preserve"
 >
 	<style type="text/css">
 		.st0 {
-			fill: rgb(var(--dark-a));
+			fill: var(--dark-a);
 		}
 	</style>
 	<g id="XMLID_37_">
-		<polygon
-			id="XMLID_29_"
-			class="st0"
-			points="0.1,1.5 0.3,1.9 12.6,1.9 12.9,1.5 6.5,0 	"
-		/>
-		<rect
-			id="XMLID_23_"
-			x="0.4"
-			y="2.5"
-			class="st0"
-			width="12.2"
-			height="1.1"
-		/>
+		<polygon id="XMLID_29_" class="st0" points="0.1,1.5 0.3,1.9 12.6,1.9 12.9,1.5 6.5,0 	" />
+		<rect id="XMLID_23_" x="0.4" y="2.5" class="st0" width="12.2" height="1.1" />
 	</g>
 	<path
 		id="XMLID_30_"
@@ -54,14 +47,7 @@
 	c0,0-0.2-2.9-0.2-4.4s0.2-3.7,0.2-3.7L7.7,4.2z"
 	/>
 	<g id="XMLID_38_">
-		<rect
-			id="XMLID_31_"
-			x="0.4"
-			y="13.1"
-			class="st0"
-			width="12.3"
-			height="0.6"
-		/>
+		<rect id="XMLID_31_" x="0.4" y="13.1" class="st0" width="12.3" height="0.6" />
 		<rect id="XMLID_35_" y="14.3" class="st0" width="13.1" height="0.7" />
 	</g>
 </svg>

@@ -1,20 +1,13 @@
 <script>
 	// import { updateAllCollectionsList } from '../data/db';
-	import { fly, slide } from 'svelte/transition';
-	import AuthForm from './AuthForm.svelte';
-	import { authStore } from './authStore';
+	import { fly, slide } from 'svelte/transition'
+	import AuthForm from './AuthForm.svelte'
+	import { authStore } from './authStore'
 
-	const {
-		githubSignIn,
-		signIn,
-		signUp,
-		status,
-		successMessage,
-		error,
-	} = authStore;
+	const { githubSignIn, signIn, signUp, status, successMessage, error } = authStore
 
 	let email = null,
-		password = null;
+		password = null
 </script>
 
 <div class="login-container">
@@ -51,10 +44,10 @@
 	}
 	.success-message {
 		text-align: center;
-		background-color: rgb(var(--light-a));
+		background-color: var(--light-a);
 		border: 1px solid rgb(var(--primary));
 		font-variation-settings: 'wght' 700;
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 		font-size: 18px;
 		border-radius: 5px;
 		padding: 5px 10px;
@@ -63,8 +56,8 @@
 	}
 	.error-message {
 		border: 1px solid rgb(245, 175, 167);
-		background-color: rgb(var(--light-a));
-		color: rgb(var(--dark-b));
+		background-color: var(--light-a);
+		color: var(--dark-b);
 		border-radius: 5px;
 		padding: 5px 10px;
 		height: 100%;

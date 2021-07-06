@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="buttons">
-		<Button>Cancel</Button>
+		<Button borderHover="1px solid var(--brand-a)">Cancel</Button>
 		<Button>Save</Button>
 	</div>
 
@@ -70,7 +70,7 @@
 		margin: 30vh auto;
 
 		border-radius: 10px;
-		background: rgb(var(--light-a));
+		background: var(--light-a);
 		box-shadow: 0 5px 15px 5px #00000011;
 	}
 
@@ -107,11 +107,11 @@
 		font-family: 'Abel';
 		font-size: 1rem;
 
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 		border: 1px solid rgba(var(--light-b), 0);
 		border-radius: 3px;
 		outline: none;
-		background: rgb(var(--light-a));
+		background: var(--light-a);
 	}
 
 	input:focus {
@@ -181,7 +181,7 @@
 
 		font-size: 1.2rem;
 
-		color: rgb(var(--dark-b));
+		color: var(--dark-b);
 		border-radius: 5px;
 		background: rgba(var(--light-b), 0.5);
 

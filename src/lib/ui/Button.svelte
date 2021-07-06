@@ -1,19 +1,23 @@
 <script>
-	export let text = 'var(--dark-a)';
-	export let texthover = 'var(--brand-a)';
-	export let display = '';
-	export let bg = 'var(--light-a)';
-	export let bghover = 'var(--light-a)';
-	export let style = '';
+	export let text = 'var(--dark-a)'
+	export let texthover = 'var(--brand-a)'
+	export let display = ''
+	export let bg = 'var(--light-a)'
+	export let bgHover = 'var(--light-a)'
+	export let border = '1px solid var(--light-a)'
+	export let borderHover = '1px solid var(--light-a)'
+	export let style = ''
 </script>
 
 <button
 	on:click
 	style="
 		--bg:{bg};
-		--bghover:{bghover};
+		--bgHover:{bgHover};
 		--text:{text};
 		--texthover:{texthover};
+		--border:{border};
+		--borderHover:{borderHover};
 		display:{display};
 		{style}
 	"
@@ -29,7 +33,7 @@
 		padding: 0.5em 1em;
 		margin: 1em 0.5em;
 
-		border: none;
+		border: var(--border);
 		border-radius: 5px;
 		box-shadow: 0 2px 4px #0002;
 
@@ -41,7 +45,8 @@
 		transition: 0.2s;
 	}
 	button:hover {
-		background: var(--bghover);
+		background: var(--bgHover);
+		border: var(--borderHover);
 		color: var(--texthover);
 		box-shadow: 0 4px 8px #0002;
 		transform: scale(1.05);

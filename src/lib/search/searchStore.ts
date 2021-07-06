@@ -1,3 +1,3 @@
-import { asyncLocalStorageStore } from '../utils/asyncLocalStorageStore';
+import localStorageStore from '$utils/localStorageStore'
 
-export const activeEngine = asyncLocalStorageStore('active', 0);
+export const activeEngine = localStorageStore('active', 0);

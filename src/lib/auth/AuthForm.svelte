@@ -1,18 +1,18 @@
 <script>
-	import { authStore, showAuthForm } from './authStore';
-	import isStrongPassword from 'validator/es/lib/isStrongPassword';
-	import { elasticOut, quintOut } from 'svelte/easing';
-	import { slide, fly, fade, scale } from 'svelte/transition';
-	import { createEventDispatcher } from 'svelte';
-	import isEmail from 'validator/es/lib/isEmail';
-	import Spinner from './Spinner.svelte';
-	import EyeIcon from './EyeIcon.svelte';
-	import { url } from '@roxi/routify';
-	import GithubIcon from '../icons/GithubIcon.svelte';
+	import { authStore, showAuthForm } from './authStore'
+	import isStrongPassword from 'validator/es/lib/isStrongPassword'
+	import { elasticOut, quintOut } from 'svelte/easing'
+	import { slide, fly, fade, scale } from 'svelte/transition'
+	import { createEventDispatcher } from 'svelte'
+	import isEmail from 'validator/es/lib/isEmail'
+	import Spinner from './Spinner.svelte'
+	import EyeIcon from './EyeIcon.svelte'
+	import { url } from '@roxi/routify'
+	import GithubIcon from '../icons/GithubIcon.svelte'
 
-	const { status, loading, handleGithubSuccess, authenticated } = authStore;
+	const { status, loading, handleGithubSuccess, authenticated } = authStore
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
 	let active = 'login',
 		showPassword = false,
@@ -20,37 +20,34 @@
 		emailInput,
 		passwordInput,
 		statusColor,
-		passwordValid = false;
+		passwordValid = false
 
-	export let email, password;
+	export let email, password
 
-	$: statusColor = 'rgb(var(--light-c))';
+	$: statusColor = 'var(--light-c)'
 
 	$: switch ($status) {
 		case 'invalid':
-			statusColor = 'rgb(var(--light-c))';
-			break;
+			statusColor = 'var(--light-c)'
+			break
 		case 'valid':
-			statusColor = 'rgb(var(--primary))';
-			break;
+			statusColor = 'rgb(var(--primary))'
+			break
 		case 'error':
-			statusColor = 'rgb(var(--error))';
-			break;
+			statusColor = 'rgb(var(--error))'
+			break
 		default:
-			statusColor = 'rgb(var(--light-c))';
-			break;
+			statusColor = 'var(--light-c)'
+			break
 	}
 
-	$: emailValid = email ? isEmail(email) : false;
-	$: formValid = emailValid && passwordValid;
-	$: $status = emailValid && formValid ? 'valid' : 'invalid';
+	$: emailValid = email ? isEmail(email) : false
+	$: formValid = emailValid && passwordValid
+	$: $status = emailValid && formValid ? 'valid' : 'invalid'
 
 	function checkPassword(e) {
-		password = e.target.value;
-		passwordValid =
-			passwordInput.validity.valid && isStrongPassword(password)
-				? true
-				: false;
+		password = e.target.value
+		passwordValid = passwordInput.validity.valid && isStrongPassword(password) ? true : false
 	}
 
 	// Popup window
@@ -59,31 +56,28 @@
 			$url('./auth/login'),
 			'login',
 			`scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-			width=400,height=600,left=25vw,top=25vh`,
-		);
+			width=400,height=600,left=25vw,top=25vh`
+		)
 	}
 	// Handoff response from popup window.
 	window.handleRes = async (res) => {
-		await handleGithubSuccess(res);
-	};
+		await handleGithubSuccess(res)
+	}
 
 	function bounce(node, params) {
-		const existingTransform = getComputedStyle(node).transform.replace(
-			'none',
-			'',
-		);
+		const existingTransform = getComputedStyle(node).transform.replace('none', '')
 		return {
 			delay: params.delay || 0,
 			duration: params.duration || 400,
 			easing: params.easing || elasticOut,
 			css: function (t, u) {
-				const padding = u * 0.8;
-				return `transform: ${existingTransform} scale(${t + padding})`;
-			},
-		};
+				const padding = u * 0.8
+				return `transform: ${existingTransform} scale(${t + padding})`
+			}
+		}
 	}
 
-	$: if ($authenticated) $showAuthForm = false;
+	$: if ($authenticated) $showAuthForm = false
 </script>
 
 <span style="--status-color: {statusColor}">
@@ -126,7 +120,7 @@
 							in:bounce={{
 								easing: elasticOut,
 								delay: 50,
-								duration: 750,
+								duration: 750
 							}}
 							class="login-input email"
 							required
@@ -144,7 +138,7 @@
 							in:bounce={{
 								easing: elasticOut,
 								delay: 250,
-								duration: 750,
+								duration: 750
 							}}
 							class="login-input password"
 							required
@@ -182,13 +176,11 @@
 									y: 100,
 									delay: 200,
 									easing: quintOut,
-									duration: 400,
+									duration: 400
 								}}
 								out:fly={{ y: 100, duration: 750 }}
 								on:click|preventDefault={() =>
-									active == 'login'
-										? dispatch('signin')
-										: dispatch('signup')}
+									active == 'login' ? dispatch('signin') : dispatch('signup')}
 								value={active == 'login' ? 'Login' : 'Sign Up'}
 							/>
 						{/if}
@@ -263,15 +255,15 @@
 		transition: 500ms;
 		text-align: center;
 
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 		border: 1px solid var(--status-color);
 		border-radius: 8px;
 		outline: none;
 		outline-color: rgb(var(--primary));
-		background: rgb(var(--light-a));
+		background: var(--light-a);
 	}
 	::placeholder {
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 	}
 	.login-input:focus::placeholder {
 		opacity: 0;
@@ -295,11 +287,11 @@
 		transition: 250ms;
 		letter-spacing: 1px;
 
-		color: rgb(var(--dark-a));
+		color: var(--dark-a);
 		border: 1px solid var(--status-color);
 		border-radius: 5px;
-		outline-color: rgb(var(--dark-a));
-		background-color: rgb(var(--light-a));
+		outline-color: var(--dark-a);
+		background-color: var(--light-a);
 
 		font-variation-settings: 'wght' 500;
 	}
@@ -403,7 +395,7 @@
 
 		border: solid 1px var(--status-color);
 		border-radius: 10px;
-		background: rgb(var(--light-a));
+		background: var(--light-a);
 		box-shadow: 0 0 10px var(--status-color);
 	}
 </style>

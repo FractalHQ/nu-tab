@@ -1,4 +1,4 @@
-import { asyncLocalStorageStore } from '../utils/asyncLocalStorageStore'
+import localStorageStore from '$lib/utils/localStorageStore'
 import { writable } from 'svelte/store'
 
 export const ranges = {
@@ -15,6 +15,6 @@ const default_settings = {
     showTitle: false
 };
 
-export const settings = asyncLocalStorageStore('settings', default_settings)
+export const settings = localStorageStore('settings', default_settings)
 
 export const showSettings = writable(false)
