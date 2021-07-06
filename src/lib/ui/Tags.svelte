@@ -233,7 +233,7 @@
 				)
 			}
 
-			var matchs = autoCompleteValues
+			let matchs = autoCompleteValues
 				.filter((e) => e[autoCompleteKey].toLowerCase().includes(value.toLowerCase()))
 				.map((matchTag) => {
 					return {
@@ -245,7 +245,7 @@
 					}
 				})
 		} else {
-			var matchs = autoCompleteValues
+			let matchs = autoCompleteValues
 				.filter((e) => e.toLowerCase().includes(value.toLowerCase()))
 				.map((matchTag) => {
 					return {
@@ -330,24 +330,26 @@
 		{/each}
 	{/if}
 	<!-- id={id} -->
-	<Tooltip content="New_tag" placement="bottom" offset={[0, 12]} delay={[1000, 150]}>
-		<input
-			type="text"
-			{name}
-			bind:value={tag}
-			on:keydown={setTag}
-			on:keyup={getMatchElements}
-			on:paste={onPaste}
-			on:drop={onDrop}
-			on:blur={() => onBlur(tag)}
-			on:click|stopPropagation
-			class="input new-tag"
-			{placeholder}
-			disabled={disable}
-			onfocus="this.placeholder = ''"
-			onblur="this.placeholder = '+'"
-		/>
-	</Tooltip>
+	<!-- <Tooltip content="New_tag" placement="bottom" offset={[0, 12]} delay={[1000, 150]}> -->
+	<br />
+	<input
+		type="text"
+		{name}
+		bind:value={tag}
+		on:keydown={setTag}
+		on:keyup={getMatchElements}
+		on:paste={onPaste}
+		on:drop={onDrop}
+		on:blur={() => onBlur(tag)}
+		on:click|stopPropagation
+		class="input new-tag"
+		{placeholder}
+		disabled={disable}
+		onfocus="this.placeholder = ''"
+		onblur="this.placeholder = 'new tag'"
+		autocomplete="off"
+	/>
+	<!-- </Tooltip> -->
 </div>
 
 {#if autoComplete && arrelementsmatch.length > 0}
@@ -386,9 +388,8 @@
 
 		/* align-items: center; */
 
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-			'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-		font-size: 14px;
+		font-family: inherit;
+		font-size: 1rem;
 
 		background: none;
 	}
@@ -396,24 +397,24 @@
 	.input-layout {
 		display: flex;
 		flex-wrap: wrap;
+		position: relative;
 
-		/* align-items: center; */
+		align-items: center;
+		justify-content: center;
+		justify-items: center;
 
 		max-width: 100%;
-		margin-left: -3px;
+		margin: auto;
 
 		border: solid 1px rgb(var(--light-b-rgb), 0);
 		border-radius: 2px;
 	}
 
 	.input {
+		display: flex;
 		flex: 1;
 
 		margin: auto;
-		margin-left: 15px;
-		margin-right: 5px;
-
-		/* padding: 5px; */
 
 		font-family: inherit;
 
@@ -437,13 +438,29 @@
 		color: var(--light-c);
 
 		transform: translate(0px, -1px);
+		text-align: center;
 	}
 
 	.input.new-tag {
-		height: 15px;
-		margin-left: 0;
+		position: absolute;
+		right: 0;
+
+		bottom: -50%;
+		left: 0;
+
+		height: 20px;
+		margin: auto;
+
+		border: 1px solid rgba(var(--brand-a-rgb), 0);
+
+		transition: 0.5s;
 
 		transform: translateY(-2px);
+	}
+	.input-layout:hover .new-tag,
+	.new-tag:focus,
+	.new-tag:active {
+		border-color: rgba(var(--brand-a-rgb), 0.25);
 	}
 
 	.input-tag {

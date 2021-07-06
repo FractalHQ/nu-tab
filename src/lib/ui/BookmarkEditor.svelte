@@ -59,29 +59,30 @@
 	</div>
 
 	<div class="setting">
-		<label for="url">url</label>
+		<!-- <label for="url">url</label> -->
 		<input name="url" type="text" bind:value={editorSettings['url']} />
 	</div>
 
 	<div class="setting">
-		<label for="tags">tags</label>
+		<!-- <label for="tags">tags</label> -->
 		<!-- <input name="tags" type="text" bind:value={editorSettings['tags']} /> -->
 		<div name="tags" class="tags">
 			<Tags
 				on:updateTags={(e) => updateTags(e, i, bookmark_id)}
+				bind:tags={editorSettings['tags']}
+				placeholder={'new tag'}
 				on:tags={handleTags}
-				placeholder={'+'}
+				autoComplete={false}
 				allowPaste={true}
 				onlyUnique={true}
 				removeKeys={[46]}
+				addKeys={[9, 13]}
 				allowDrop={true}
 				allowBlur={true}
 				splitWith={'/'}
-				addKeys={[9, 13]}
 				name={'tags'}
-				maxTags={5}
+				maxTags={10}
 				minChars={2}
-				bind:tags={editorSettings['tags']}
 			/>
 		</div>
 	</div>
@@ -128,8 +129,7 @@
 		font-size: 1.3rem;
 	}
 
-	input,
-	.tags {
+	input {
 		width: 70%;
 		margin: 0.5rem 1rem;
 		padding: 0 8px 0 8px;
@@ -145,7 +145,11 @@
 	}
 
 	.tags {
+		position: relative;
+
+		width: 90%;
 		height: 100%;
+		margin: 1rem auto;
 
 		font-family: var(--font-primary);
 	}
@@ -153,10 +157,11 @@
 	.buttons {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		align-items: flex-end;
+		justify-items: center;
 
-		height: 4rem;
-		width: 10rem;
-		margin: 1rem auto;
+		width: 15rem;
+		margin: 2rem auto;
 
 		gap: 1rem;
 	}
@@ -176,11 +181,14 @@
 	}
 
 	input[name='url'] {
+		margin: auto;
 		margin-bottom: 1.1rem;
 
 		font: 0.8rem monospace;
 
 		color: var(--light-c);
+
+		text-align: center;
 	}
 
 	input[name='description'] {
@@ -192,10 +200,7 @@
 	}
 
 	input[name='description']::placeholder {
-		color: rgba(var(--dark-d), 0.3);
-	}
-	input[name='description']:hover::placeholder {
-		content: 'description';
+		color: rgba(var(--dark-d-rgb), 0.25);
 	}
 
 	input[type='color'] {
