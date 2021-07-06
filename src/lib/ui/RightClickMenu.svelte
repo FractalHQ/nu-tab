@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition'
 	import { createEventDispatcher } from 'svelte'
-
-	import { fly, slide } from 'svelte/transition'
 	import { showSettings } from '../settings/settingsStore'
 	import { clickOutside } from '../utils/clickOutside'
+	const dispatch = createEventDispatcher()
 
 	export let options = [
 		{
@@ -16,13 +16,13 @@
 		}
 	]
 	let showMenu = false
-	let x, y
+	let x: number, y: number
 
-	const dispatch = createEventDispatcher()
 	function show(e: MouseEvent) {
+		// if target is bookmark, show it's settings.
+		// else show context menu
 		const target = e.target as Element
 		if (target.className.includes('icon')) {
-			// TODO: Show settings pane for e.target
 			const classes = target.classList
 			let index: number
 			classes.forEach((c) => {
