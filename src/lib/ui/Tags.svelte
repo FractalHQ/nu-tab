@@ -445,11 +445,13 @@
 		position: absolute;
 		right: 0;
 
-		bottom: -50%;
+		bottom: -30px;
 		left: 0;
 
 		height: 20px;
 		margin: auto;
+
+		padding: 0.3rem 0.5rem;
 
 		border: 1px solid rgba(var(--brand-a-rgb), 0);
 
@@ -460,7 +462,7 @@
 	.input-layout:hover .new-tag,
 	.new-tag:focus,
 	.new-tag:active {
-		border-color: rgba(var(--brand-a-rgb), 0.25);
+		border-color: rgba(var(--confirm-rgb), 0.25);
 	}
 
 	.input-tag {
