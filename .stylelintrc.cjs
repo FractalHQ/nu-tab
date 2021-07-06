@@ -5,7 +5,7 @@ module.exports = {
 		"indentation": "tab",
 		"string-quotes": "single",
 		"no-duplicate-selectors": true,
-		"color-hex-case": "upper",
+		"color-hex-case": "lower",
 		"color-hex-length": "long",
 		"selector-combinator-space-after": "always",
 		"selector-attribute-quotes": "always",

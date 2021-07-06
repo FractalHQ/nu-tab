@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Tooltip from '$ui/Tooltip.svelte'
 	import { createEventDispatcher } from 'svelte'
 
@@ -10,21 +10,21 @@
 		return s.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')
 	}
 
-	export let tags
-	export let addKeys
-	export let maxTags
-	export let onlyUnique
-	export let removeKeys
-	export let placeholder
-	export let allowPaste
-	export let allowDrop
-	export let splitWith
-	export let autoComplete
-	export let autoCompleteKey
-	export let name
-	export let allowBlur
-	export let disable
-	export let minChars
+	export let tags: string[]
+	export let addKeys: number[]
+	export let maxTags: number | false
+	export let onlyUnique: boolean
+	export let removeKeys: number[]
+	export let placeholder: string
+	export let allowPaste: boolean
+	export let allowDrop: boolean
+	export let splitWith: string
+	export let autoComplete: boolean
+	export let autoCompleteKey: number | false
+	export let name: string
+	export let allowBlur: boolean
+	export let disable: boolean
+	export let minChars: number
 
 	$: tags = tags || []
 	$: addKeys = addKeys || [13]
@@ -341,7 +341,7 @@
 			on:drop={onDrop}
 			on:blur={() => onBlur(tag)}
 			on:click|stopPropagation
-			class="input"
+			class="input new-tag"
 			{placeholder}
 			disabled={disable}
 			onfocus="this.placeholder = ''"
@@ -387,6 +387,7 @@
 
 	.input-layout {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 
 		max-width: 100%;
@@ -407,6 +408,7 @@
 
 		margin: auto;
 		margin-left: 15px;
+		margin-right: 5px;
 		padding: 5px;
 
 		font-family: inherit;
@@ -429,6 +431,11 @@
 		transform: translate(2px, -1px);
 	}
 
+	.input.new-tag {
+		margin-left: 0;
+		height: 80%;
+	}
+
 	/* input-tag */
 
 	.input-tag {
@@ -436,10 +443,7 @@
 		display: flexbox;
 		display: flex;
 
-		margin-right: 5px;
 		list-style: none;
-
-		/* background: rgb(var(--light-d)); */
 		color: var(--light-d);
 		border-radius: 2px;
 

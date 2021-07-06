@@ -1,21 +1,29 @@
-<script>
+<script lang="ts">
 	import Button from '$ui/Button.svelte'
 	import Tags from '$ui/Tags.svelte'
 
-	export let editorSettings = {}
-	export let settings, i, bookmark_id
-	let descriptionHover = false
+	export let settings,
+		i: number,
+		bookmark_id: string,
+		editorSettings = {}
+
+	let hovering = false,
+		tag = ''
+
 	$: placeholder = descriptionHover ? 'description' : '+'
 	let debug = false
 
-	let hovering
-	let tag = ''
+	let descriptionInput: HTMLInputElement,
+		descriptionHover = false
+
 	function handleTags(event) {
 		tag = event.detail.tags
 	}
-	async function updateTags(event, index, id) {
-		settings['tags'] = event.detail.tags
+	async function updateTags(event, index: number, id: string) {
+		editor['tags'] = event.detail.tags
 	}
+
+	const hasFocus = (el: Element) => document.activeElement === el
 </script>
 
 {#if debug}
@@ -25,7 +33,7 @@
 <div class="settings-container">
 	<img name="image" src={editorSettings['image']} alt={editorSettings['title']} />
 
-	<div class="setting">
+	<div class="setting title">
 		<div id="title" contenteditable bind:innerHTML={editorSettings['title']} />
 	</div>
 
@@ -33,11 +41,20 @@
 		<!-- <label for='description'>description</label> -->
 		<input
 			name="description"
-			{placeholder}
+			placeholder="+"
 			type="text"
+			bind:this={descriptionInput}
 			bind:value={editorSettings['description']}
-			on:mouseover={() => (descriptionHover = true)}
-			on:mouseout={() => (descriptionHover = false)}
+			on:mouseover={() => {
+				descriptionHover = true
+				if (!hasFocus(descriptionInput)) descriptionInput.placeholder = 'description'
+			}}
+			on:mouseout={() => {
+				descriptionHover = false
+				if (!hasFocus(descriptionInput)) descriptionInput.placeholder = '+'
+			}}
+			onfocus="this.placeholder=''"
+			onblur="this.placeholder='+'"
 		/>
 	</div>
 
@@ -105,31 +122,10 @@
 
 	.setting {
 		display: flex;
+		position: relative;
 		justify-content: space-around;
 
 		font-size: 1.3rem;
-	}
-
-	.tags {
-		font-family: var(--font-primary);
-	}
-
-	.buttons {
-		display: flex;
-
-		width: max-content;
-		margin: 1rem auto;
-
-		gap: 1rem;
-	}
-
-	label {
-		width: 20%;
-		margin: auto 0;
-
-		color: rgba(var(--dark-d), 0.5);
-
-		text-align: right;
 	}
 
 	input,
@@ -148,12 +144,38 @@
 		background: var(--light-a);
 	}
 
+	.tags {
+		font-family: var(--font-primary);
+		height: max-content;
+		min-height: 5rem;
+		transform: translateY(39%);
+	}
+
+	.buttons {
+		display: flex;
+
+		width: max-content;
+		margin: 1rem auto;
+
+		gap: 1rem;
+	}
+
+	label {
+		width: 10%;
+		margin: auto 0 auto auto;
+
+		color: rgba(var(--dark-d), 0.5);
+
+		text-align: center;
+	}
+
 	input:focus {
 		border: 1px solid rgba(var(--light-b), 1);
 	}
 
 	input[name='url'] {
-		font-family: monospace;
+		font: 0.8rem monospace;
+		color: var(--light-c);
 	}
 
 	input[name='description'] {
@@ -193,17 +215,33 @@
 		margin: 2rem auto 0 auto;
 	}
 
-	#title {
-		margin: 0 auto 0 auto;
-		padding: 0.2rem 0.7rem;
-
-		/* border: 1px solid rgba(var(--dark-d), 0); */
-		outline-color: rgba(var(--dark-d), 0.2);
-		outline-width: 0.5;
+	.setting.title {
+		width: max-content;
+		margin: auto;
 	}
 
-	#title:focus {
-		/* border: 1px solid rgba(var(--dark-d), 0.75); */
+	#title {
+		margin: 5px auto 5px auto;
+		padding: 0.2rem 0.7rem;
+
+		outline: none;
+
+		transition: 0.2s;
+	}
+	#title:after {
+		display: block;
+		position: absolute;
+		inset: 0;
+
+		border: 1px solid rgba(var(--dark-d-rgb), 0);
+		border-radius: 5px;
+		content: '';
+
+		transition: border-color 0.2s;
+	}
+
+	#title:focus:after {
+		border-color: rgba(var(--dark-d-rgb), 0.5);
 	}
 
 	pre {
