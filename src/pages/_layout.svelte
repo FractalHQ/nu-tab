@@ -1,6 +1,6 @@
 <script>
-	import { showLoginPopup, authStore } from '$lib/auth/authStore'
-	import LoginPopup from '$lib/auth/LoginPopup.svelte'
+	// import { showLoginPopup, authStore } from '$lib/auth/authStore'
+	// import LoginPopup from '$lib/auth/LoginPopup.svelte'
 	import Modal from '$lib/ui/Modal.svelte'
 	import { onMount } from 'svelte'
 
@@ -8,10 +8,10 @@
 	import Themer from '$lib/theme/Themer.svelte'
 	import Nav from '$lib/ui/Nav.svelte'
 
-	const { initAuth } = authStore
+	// const { initAuth } = authStore
 
 	onMount(() => {
-		initAuth()
+		// initAuth()
 	})
 
 	const r = (max = 255) => Math.floor(Math.random() * Math.floor(max))
@@ -30,10 +30,9 @@
 	<Settings />
 </div>
 
-<Modal bind:showModal={$showLoginPopup}>
+<!-- <Modal bind:showModal={$showLoginPopup}>
 	<LoginPopup />
-</Modal>
-
+</Modal> -->
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 	#app {
