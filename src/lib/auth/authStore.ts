@@ -15,8 +15,10 @@ function createAuthStore() {
 	const error = writable(null);
 	const user = writable(null);
 
-	const supabaseURL = import.meta.env.VITE_PUBLIC_SUPABASE_URL;
-	const supabasePublicKey = import.meta.env.VITE_PUBLIC_SUPABASE_KEY;
+	// const supabaseURL = import.meta.env.VITE_PUBLIC_SUPABASE_URL;
+	// const supabasePublicKey = import.meta.env.VITE_PUBLIC_SUPABASE_KEY;
+	const supabaseURL = '';
+	const supabasePublicKey = '';
 	
 	const supabase = createClient(supabaseURL, supabasePublicKey);
 
